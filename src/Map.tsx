@@ -6,7 +6,7 @@ export class Map extends Component {
     render() {
         return (
             <div className="map">
-                <GoogleMapReact defaultCenter={{lat: 59.95, lng: 30.33}} defaultZoom={11}>
+                <GoogleMapReact defaultCenter={{lat: 24.977707, lng: 121.277557}} defaultZoom={15}>
                 </GoogleMapReact>
             </div>
         );
