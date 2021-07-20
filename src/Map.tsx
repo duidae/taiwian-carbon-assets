@@ -21,7 +21,8 @@ export class Map extends Component {
                 <GoogleMapReact
                     defaultCenter={{lat: 24.985892654871, lng: 121.55384976076}}
                     defaultZoom={17}
-                    yesIWantToUseGoogleMapApiInternals
+                    options={{streetViewControl: true, mapTypeControl: true}}
+                    yesIWantToUseGoogleMapApiInternals={true}
                     onGoogleApiLoaded={({map, maps}) => this.loadGeojson(map, maps)}
                 >
                 </GoogleMapReact>
