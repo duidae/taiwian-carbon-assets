@@ -15,14 +15,14 @@ export class Map extends Component {
 
         map.data.loadGeoJson("renewalGeojson.json");
 
-        let clickInfoWindow: any;
+        // Click event
         map.data.addListener("click", (event: any) => {
             const content = `${event.feature.getProperty("id")}<br>${event.feature.getProperty("type")}<br>${event.feature.getProperty("status")}`;
-            clickInfoWindow?.close();
-            clickInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
+            const clickInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
             clickInfoWindow.open({map, shouldFocus: false});
         });
 
+        // Hover event
         let mouseoverInfoWindow: any;
         map.data.addListener("mouseover", (event: any) => {
             const content = `${event.feature.getProperty("id")}<br>${event.feature.getProperty("type")}<br>${event.feature.getProperty("status")}`;
