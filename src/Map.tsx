@@ -4,10 +4,13 @@ import "./Map.scss";
 
 export class Map extends Component {
     private loadGeojson = (map: any, maps: any) => {
-        map.data.setStyle({
-            fillColor: "green",
-            strokeColor: "green",
-            clickable: true
+        map.data.setStyle((feature: any) => {
+            const color = feature.getProperty("status") === "有效" ? "green" : "gray";
+            return {
+                fillColor: color,
+                strokeColor: color,
+                clickable: true
+            };
         });
 
         map.data.loadGeoJson("renewalGeojson.json");
