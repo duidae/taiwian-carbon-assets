@@ -10,12 +10,13 @@ export class Map extends Component {
             clickable: true
         });
 
-        map.data.loadGeoJson("testGeojson.json");
+        map.data.loadGeoJson("renewalGeojson.json");
 
         let infoWindow = new google.maps.InfoWindow();
         map.data.addListener("click", (event: any) => {
+            const content = `${event.feature.getProperty("id")}<br>${event.feature.getProperty("type")}<br>${event.feature.getProperty("status")}`;
             infoWindow.close();
-            infoWindow = new google.maps.InfoWindow({position: event.latLng, content: event.feature.getProperty("query")});
+            infoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
             infoWindow.open(map);
         });
     };
@@ -24,7 +25,7 @@ export class Map extends Component {
         return (
             <div className="map">
                 <GoogleMapReact
-                    defaultCenter={{lat: 24.985892654871, lng: 121.55384976076}}
+                    defaultCenter={{lat: 25.036963137555553, lng: 121.52847908553798}}
                     defaultZoom={17}
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}
