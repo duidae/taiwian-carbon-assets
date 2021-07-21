@@ -10,9 +10,14 @@ export class Map extends Component {
             clickable: true
         });
 
-        map.data.loadGeoJson(
-            "testGeojson.json"
-        );
+        map.data.loadGeoJson("testGeojson.json");
+
+        let infoWindow = new google.maps.InfoWindow();
+        map.data.addListener("click", (event: any) => {
+            infoWindow.close();
+            infoWindow = new google.maps.InfoWindow({position: event.latLng, content: event.feature.getProperty("query")});
+            infoWindow.open(map);
+        });
     };
 
     render() {
