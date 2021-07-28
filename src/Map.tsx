@@ -43,8 +43,7 @@ export class Map extends Component {
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}
                     onGoogleApiLoaded={({map, maps}) => this.loadGeojson(map, maps)}
-                >
-                </GoogleMapReact>
+                ></GoogleMapReact>
             </div>
         );
     }
