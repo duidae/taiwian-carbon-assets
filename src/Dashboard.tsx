@@ -2,7 +2,11 @@ import * as React from "react";
 import {observer} from "mobx-react";
 import {action, makeObservable, observable} from "mobx";
 import clsx from "clsx";
-import {AppBar, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
+import {
+  AppBar, Divider, Drawer, List, ListItem,
+  ListItemIcon, ListItemText, IconButton, InputBase, Toolbar,
+  Typography
+} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import {blue, lightGreen} from "@material-ui/core/colors";
 import SearchIcon from "@material-ui/icons/Search";
@@ -13,7 +17,7 @@ import EcoIcon from "@material-ui/icons/Eco";
 import LayersIcon from "@material-ui/icons/Layers";
 import "./Dashboard.scss";
 
-const DRAWER_WIDTH = 240;
+const DRAWER_WIDTH = 160;
 const styles = theme => ({
     root: {
         display: "flex"
@@ -131,7 +135,7 @@ class Dashboard extends React.Component<any, any> {
                         碳匯城鄉
                     </Typography>
                     <SearchIcon />
-                    <InputBase placeholder="Search…" inputProps={{"aria-label": "search"}} />
+                    <InputBase placeholder="搜尋地號…" inputProps={{"aria-label": "search"}} />
                 </Toolbar>
             </AppBar>
         );
