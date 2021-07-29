@@ -61,7 +61,7 @@ export default function PiChart() {
 
   return (
     <Card>
-      <CardHeader title="Current Visits" />
+      <CardHeader title="公有資產盤點" />
       <ReactApexChart type="pie" series={CHART_DATA} options={chartOptions} height={280} />
       {/*<ChartWrapperStyle dir="ltr">
         <ReactApexChart type="pie" series={CHART_DATA} options={chartOptions} height={280} />

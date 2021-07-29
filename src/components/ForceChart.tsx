@@ -45,7 +45,7 @@ export default function AppCurrentSubject() {
     fill: { opacity: 0.48 },
     legend: { floating: true, horizontalAlign: 'center' },
     xaxis: {
-      categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+      categories: ['節能', '減碳', '開發經費', '環境評估', '綜和效益', '人力'],
       labels: {
         style: {
           colors: [
@@ -63,7 +63,7 @@ export default function AppCurrentSubject() {
 
   return (
     <Card>
-      <CardHeader title="Current Subject" />
+      <CardHeader title="減碳策略" />
       <ReactApexChart type="radar" series={CHART_DATA} options={chartOptions} height={340} />
       {/*
       <ChartWrapperStyle dir="ltr">
