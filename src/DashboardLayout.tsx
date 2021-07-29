@@ -2,11 +2,7 @@ import * as React from "react";
 import {observer} from "mobx-react";
 import {action, makeObservable, observable} from "mobx";
 import clsx from "clsx";
-import {
-  AppBar, Divider, Drawer, List, ListItem,
-  ListItemIcon, ListItemText, IconButton, InputBase, Toolbar,
-  Typography
-} from "@material-ui/core";
+import {AppBar, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import {blue, lightGreen} from "@material-ui/core/colors";
 import SearchIcon from "@material-ui/icons/Search";
@@ -16,7 +12,7 @@ import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import EcoIcon from "@material-ui/icons/Eco";
 import LayersIcon from "@material-ui/icons/Layers";
 import "./DashboardLayout.scss";
-import { DashboardApp } from "./pages/DashboardApp";
+import {DashboardApp} from "./pages/DashboardApp";
 
 const DRAWER_WIDTH = 160;
 const styles = theme => ({
@@ -77,8 +73,8 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
-    },
+        padding: theme.spacing(3)
+    }
 });
 
 /*
@@ -191,7 +187,7 @@ class DashboardLayout extends React.Component<any, any> {
                 {drawer}
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <DashboardApp/ >
+                    <DashboardApp />
                 </main>
             </div>
         );
