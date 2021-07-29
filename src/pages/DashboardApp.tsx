@@ -8,15 +8,17 @@ import ForceChart from "../components/ForceChart";
 export const DashboardApp: React.FC = props => {
   return (
       <Container maxWidth="xl">
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={8}>
+        <Grid container direction={"row"} spacing={2}>
+          <Grid item xs={8}>
             <Map />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <PiChart />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <ForceChart />
+          <Grid direction={"column"} xs={4}>
+            <Grid item >
+                <PiChart />
+            </Grid>
+            <Grid item >
+                <ForceChart />
+            </Grid>
           </Grid>
         </Grid>
       </Container>
