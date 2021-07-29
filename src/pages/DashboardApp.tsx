@@ -3,8 +3,6 @@ import {Map} from "../Map";
 import PiChart from "../components/PiChart";
 import ForceChart from "../components/ForceChart";
 
-// ----------------------------------------------------------------------
-
 export const DashboardApp: React.FC = props => {
     return (
         <Container maxWidth="xl">

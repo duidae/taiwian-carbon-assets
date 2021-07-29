@@ -94,7 +94,6 @@ class DashboardLayout extends React.Component<any, any> {
         {key: "公有資產", icon: <MonetizationOnIcon />},
         {key: "碳收支", icon: <EcoIcon />}
     ];
-
     private SECONDARY_CONTROLS = [{key: "圖層", icon: <LayersIcon />}];
 
     constructor(props: any) {
