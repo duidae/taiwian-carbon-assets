@@ -15,7 +15,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import EcoIcon from "@material-ui/icons/Eco";
 import LayersIcon from "@material-ui/icons/Layers";
-import "./Dashboard.scss";
+import "./DashboardLayout.scss";
+import { DashboardApp } from "./pages/DashboardApp";
 
 const DRAWER_WIDTH = 160;
 const styles = theme => ({
@@ -86,7 +87,7 @@ const styles = theme => ({
 */
 
 @observer
-class Dashboard extends React.Component<any, any> {
+class DashboardLayout extends React.Component<any, any> {
     @observable isDrawerOpen: Boolean;
 
     private PRIMARY_CONTROLS = [
@@ -184,9 +185,10 @@ class Dashboard extends React.Component<any, any> {
             <div className={classes.root}>
                 {appBar}
                 {drawer}
+                <DashboardApp/ >
             </div>
         );
     }
 }
 
-export default withStyles(styles as {})(Dashboard);
+export default withStyles(styles as {})(DashboardLayout);

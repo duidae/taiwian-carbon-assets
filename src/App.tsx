@@ -1,10 +1,10 @@
-import Dashboard from "./Dashboard";
+import DashboardLayout from "./DashboardLayout";
 import "./App.scss";
 
 function App() {
     return (
         <div className="App">
-            <Dashboard />
+            <DashboardLayout />
         </div>
     );
 }
