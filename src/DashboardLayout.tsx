@@ -74,7 +74,11 @@ const styles = theme => ({
         padding: theme.spacing(0, 1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar
-    }
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
 });
 
 /*
@@ -185,7 +189,10 @@ class DashboardLayout extends React.Component<any, any> {
             <div className={classes.root}>
                 {appBar}
                 {drawer}
-                <DashboardApp/ >
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
+                    <DashboardApp/ >
+                </main>
             </div>
         );
     }
