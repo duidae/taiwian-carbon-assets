@@ -38,6 +38,7 @@ export class Map extends Component {
         return (
             <div className="map">
                 <GoogleMapReact
+                    bootstrapURLKeys={{key: "YOUR_GOOGLE_APP_KEY"}}
                     defaultCenter={{lat: 25.036963137555553, lng: 121.52847908553798}}
                     defaultZoom={17}
                     options={{streetViewControl: true, mapTypeControl: true}}
