@@ -13,7 +13,8 @@ import EcoIcon from "@material-ui/icons/Eco";
 import LayersIcon from "@material-ui/icons/Layers";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import "./DashboardLayout.scss";
 import {DashboardApp} from "./pages/DashboardApp";
 
@@ -195,9 +196,9 @@ class DashboardLayout extends React.Component<any, any> {
                                 <List component="div" disablePadding>
                                     {AppStore.Instance.dataLayers?.map(dataLayer => {
                                         return (
-                                            <ListItem button className={classes.nested}>
+                                            <ListItem button className={classes.nested} onClick={() => AppStore.Instance.selectDataLayer(dataLayer)}>
                                                 <ListItemIcon>
-                                                    <StarBorder />
+                                                    {AppStore.Instance.dataLayerSelections?.get(dataLayer) ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
                                                 </ListItemIcon>
                                                 <ListItemText primary={dataLayer} />
                                             </ListItem>
