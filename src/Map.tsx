@@ -15,7 +15,7 @@ export class Map extends Component {
             };
         });
 
-        map.data.loadGeoJson("renewalUnits_Daan.json");
+        map.data.loadGeoJson("Daan.json");
 
         // Click event
         map.data.addListener("click", (event: any) => {

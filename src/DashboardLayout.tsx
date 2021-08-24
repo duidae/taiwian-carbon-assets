@@ -2,7 +2,7 @@ import * as React from "react";
 import {observer} from "mobx-react";
 import {action, makeObservable, observable} from "mobx";
 import clsx from "clsx";
-import {AppBar, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import {blue, lightGreen} from "@material-ui/core/colors";
 import SearchIcon from "@material-ui/icons/Search";
@@ -11,10 +11,15 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import EcoIcon from "@material-ui/icons/Eco";
 import LayersIcon from "@material-ui/icons/Layers";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import StarBorder from "@material-ui/icons/StarBorder";
 import "./DashboardLayout.scss";
 import {DashboardApp} from "./pages/DashboardApp";
 
-const DRAWER_WIDTH = 160;
+import {AppStore} from "./stores";
+
+const DRAWER_WIDTH = 200;
 const styles = theme => ({
     root: {
         display: "flex"
@@ -74,6 +79,9 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3)
+    },
+    nested: {
+        paddingLeft: theme.spacing(3)
     }
 });
 
@@ -88,7 +96,8 @@ const styles = theme => ({
 
 @observer
 class DashboardLayout extends React.Component<any, any> {
-    @observable isDrawerOpen: Boolean;
+    @observable isDrawerOpen: boolean;
+    @observable isDataLayerOpen: boolean;
 
     private PRIMARY_CONTROLS = [
         {key: "公有資產", icon: <MonetizationOnIcon />},
@@ -100,6 +109,7 @@ class DashboardLayout extends React.Component<any, any> {
         super(props);
         makeObservable(this);
         this.isDrawerOpen = true;
+        this.isDataLayerOpen = true;
     }
 
     @action private handleDrawerOpen = () => {
@@ -108,6 +118,10 @@ class DashboardLayout extends React.Component<any, any> {
 
     @action private handleDrawerClose = () => {
         this.isDrawerOpen = false;
+    };
+
+    @action private handleDataLayersClick = () => {
+        this.isDataLayerOpen = !this.isDataLayerOpen;
     };
 
     public render() {
@@ -171,10 +185,27 @@ class DashboardLayout extends React.Component<any, any> {
                 <Divider />
                 <List>
                     {this.SECONDARY_CONTROLS.map(controlItem => (
-                        <ListItem button key={controlItem.key}>
-                            <ListItemIcon>{controlItem.icon}</ListItemIcon>
-                            <ListItemText primary={controlItem.key} />
-                        </ListItem>
+                        <React.Fragment>
+                            <ListItem button key={controlItem.key} onClick={this.handleDataLayersClick}>
+                                <ListItemIcon>{controlItem.icon}</ListItemIcon>
+                                <ListItemText primary={controlItem.key} />
+                                {this.isDataLayerOpen ? <ExpandLess /> : <ExpandMore />}
+                            </ListItem>
+                            <Collapse in={this.isDataLayerOpen} timeout="auto" unmountOnExit>
+                                <List component="div" disablePadding>
+                                    {AppStore.Instance.dataLayers?.map(dataLayer => {
+                                        return (
+                                            <ListItem button className={classes.nested}>
+                                                <ListItemIcon>
+                                                    <StarBorder />
+                                                </ListItemIcon>
+                                                <ListItemText primary={dataLayer} />
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
+                            </Collapse>
+                        </React.Fragment>
                     ))}
                 </List>
             </Drawer>

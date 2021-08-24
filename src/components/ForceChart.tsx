@@ -30,7 +30,7 @@ export default function AppCurrentSubject() {
     return (
         <Card>
             <CardHeader title="減碳策略" />
-            <ReactApexChart type="radar" series={CHART_DATA} options={chartOptions}/>
+            <ReactApexChart type="radar" series={CHART_DATA} options={chartOptions} />
         </Card>
     );
 }

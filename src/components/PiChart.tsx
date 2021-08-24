@@ -31,7 +31,7 @@ export default function PiChart() {
     return (
         <Card>
             <CardHeader title="公有資產盤點" />
-            <ReactApexChart type="pie" series={CHART_DATA} options={chartOptions}/>
+            <ReactApexChart type="pie" series={CHART_DATA} options={chartOptions} />
         </Card>
     );
 }
