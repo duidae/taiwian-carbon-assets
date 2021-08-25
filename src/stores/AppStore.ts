@@ -20,6 +20,7 @@ export class AppStore {
 
     @observable dataLayers: DataLayer[];
     @observable isDataLayerSelected: ObservableMap<DataLayer, boolean>;
+
     public dataLayerGeojsonMap: Map<DataLayer, string>;
     public analysisAreas = [
         {

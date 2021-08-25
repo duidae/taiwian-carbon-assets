@@ -187,7 +187,7 @@ class DashboardLayout extends React.Component<any, any> {
                     {AppStore.Instance.analysisAreas?.map(area => (
                         <React.Fragment>
                             <ListItem button key={area.key} onClick={() => AppStore.Instance.selectAreaDataLayers(area.key)}>
-                                <ListItemIcon>{area.type === AreaType.CITY ? <LocationCityIcon /> : <EmojiNatureIcon />}</ListItemIcon>
+                                <ListItemIcon>{area.type === AreaType.CITY ? <LocationCityIcon color="primary" /> : <EmojiNatureIcon color="primary" />}</ListItemIcon>
                                 <ListItemText primary={area.key} />
                                 {/*this.isDataLayerOpen ? <ExpandLess /> : <ExpandMore />*/}
                             </ListItem>
