@@ -18,7 +18,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import "./DashboardLayout.scss";
 import {DashboardApp} from "./pages/DashboardApp";
 
-import {AppStore} from "./stores";
+import {AppStore, AreaType} from "./stores";
 
 const DRAWER_WIDTH = 250;
 const styles = theme => ({
@@ -105,11 +105,6 @@ class DashboardLayout extends React.Component<any, any> {
         {key: "碳收支", icon: <EcoIcon />}
     ];
 
-    private DATA_LAYER_CONTROLS = [
-        {key: "城市 - 大安區", icon: <LocationCityIcon />},
-        {key: "鄉鎮 - 東華", icon: <EmojiNatureIcon />}
-    ];
-
     constructor(props: any) {
         super(props);
         makeObservable(this);
@@ -126,7 +121,7 @@ class DashboardLayout extends React.Component<any, any> {
     };
 
     @action private handleDataLayersClick = () => {
-        this.isDataLayerOpen = !this.isDataLayerOpen;
+        // this.isDataLayerOpen = !this.isDataLayerOpen;
     };
 
     public render() {
@@ -189,16 +184,16 @@ class DashboardLayout extends React.Component<any, any> {
                 </List>
                 <Divider />
                 <List>
-                    {this.DATA_LAYER_CONTROLS.map(controlItem => (
+                    {AppStore.Instance.analysisAreas?.map(area => (
                         <React.Fragment>
-                            <ListItem button key={controlItem.key} onClick={this.handleDataLayersClick}>
-                                <ListItemIcon>{controlItem.icon}</ListItemIcon>
-                                <ListItemText primary={controlItem.key} />
-                                {this.isDataLayerOpen ? <ExpandLess /> : <ExpandMore />}
+                            <ListItem button key={area.key} onClick={() => AppStore.Instance.selectAreaDataLayers(area.key)}>
+                                <ListItemIcon>{area.type === AreaType.CITY ? <LocationCityIcon /> : <EmojiNatureIcon />}</ListItemIcon>
+                                <ListItemText primary={area.key} />
+                                {/*this.isDataLayerOpen ? <ExpandLess /> : <ExpandMore />*/}
                             </ListItem>
                             <Collapse in={this.isDataLayerOpen} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
-                                    {AppStore.Instance.dataLayers?.map(dataLayer => {
+                                    {area.dataLayers?.map(dataLayer => {
                                         return (
                                             <ListItem button className={classes.nested} onClick={() => AppStore.Instance.selectDataLayer(dataLayer)}>
                                                 <ListItemIcon><LayersIcon color={AppStore.Instance.isDataLayerSelected?.get(dataLayer) ? "primary" : "disabled"} /></ListItemIcon>
