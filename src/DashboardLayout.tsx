@@ -2,7 +2,7 @@ import * as React from "react";
 import {observer} from "mobx-react";
 import {action, makeObservable, observable} from "mobx";
 import clsx from "clsx";
-import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import {blue, lightGreen} from "@material-ui/core/colors";
 import SearchIcon from "@material-ui/icons/Search";
@@ -121,7 +121,7 @@ class DashboardLayout extends React.Component<any, any> {
     };
 
     @action private handleDataLayersClick = () => {
-        // this.isDataLayerOpen = !this.isDataLayerOpen;
+        this.isDataLayerOpen = !this.isDataLayerOpen;
     };
 
     public render() {
@@ -188,8 +188,12 @@ class DashboardLayout extends React.Component<any, any> {
                         <React.Fragment>
                             <ListItem button key={area.key} onClick={() => AppStore.Instance.selectAreaDataLayers(area.key)}>
                                 <ListItemIcon>{area.type === AreaType.CITY ? <LocationCityIcon color="primary" /> : <EmojiNatureIcon color="primary" />}</ListItemIcon>
-                                <ListItemText primary={area.key} />
-                                {/*this.isDataLayerOpen ? <ExpandLess /> : <ExpandMore />*/}
+                                <ListItemText color="primary" primary={area.key} />
+                                <ListItemSecondaryAction>
+                                    <IconButton edge="end" aria-label="comments" onClick={this.handleDataLayersClick}>
+                                        {this.isDataLayerOpen ? <ExpandLess /> : <ExpandMore />}
+                                    </IconButton>
+                                </ListItemSecondaryAction>
                             </ListItem>
                             <Collapse in={this.isDataLayerOpen} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
