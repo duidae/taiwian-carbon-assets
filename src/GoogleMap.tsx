@@ -60,7 +60,7 @@ export class GoogleMap extends React.Component<any> {
                 <GoogleMapReact
                     bootstrapURLKeys={{key: "YOUR_GOOGLE_APP_KEY"}}
                     defaultCenter={TAIPEI_CENTER}
-                    defaultZoom={14}
+                    defaultZoom={13}
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}
                     onGoogleApiLoaded={({map, maps}) => this.initMap(map, maps)}
