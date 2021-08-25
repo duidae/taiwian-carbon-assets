@@ -151,8 +151,10 @@ class DashboardLayout extends React.Component<any, any> {
                     <Typography variant="h6" noWrap>
                         碳匯城鄉
                     </Typography>
+                    {/*
                     <SearchIcon />
                     <InputBase placeholder="搜尋地號…" inputProps={{"aria-label": "search"}} />
+                    */}
                 </Toolbar>
             </AppBar>
         );
