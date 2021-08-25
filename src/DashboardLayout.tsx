@@ -192,11 +192,13 @@ class DashboardLayout extends React.Component<any, any> {
                             <ListItem button key={area.key} onClick={() => AppStore.Instance.selectAreaDataLayers(area.key)}>
                                 <ListItemIcon>{area.type === AreaType.CITY ? <LocationCityIcon color="primary" /> : <EmojiNatureIcon color="primary" />}</ListItemIcon>
                                 <ListItemText color="primary" primary={area.key} />
+                                {this.isDrawerOpen &&
                                 <ListItemSecondaryAction>
                                     <IconButton edge="end" aria-label="comments" onClick={() => this.handleDataLayersClick(area.key)}>
                                         {this.isDataLayerOpen.get(area.key) ? <ExpandLess /> : <ExpandMore />}
                                     </IconButton>
                                 </ListItemSecondaryAction>
+                                }
                             </ListItem>
                             <Collapse in={this.isDataLayerOpen.get(area.key)} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
