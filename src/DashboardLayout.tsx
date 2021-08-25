@@ -1,6 +1,6 @@
 import * as React from "react";
 import {observer} from "mobx-react";
-import {action, makeObservable, observable} from "mobx";
+import {action, makeObservable, observable, ObservableMap} from "mobx";
 import clsx from "clsx";
 import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
@@ -95,10 +95,12 @@ const styles = theme => ({
   });
 */
 
+type Area = string;
+
 @observer
 class DashboardLayout extends React.Component<any, any> {
     @observable isDrawerOpen: boolean;
-    @observable isDataLayerOpen: boolean;
+    @observable isDataLayerOpen: ObservableMap<Area, boolean>;
 
     private PRIMARY_CONTROLS = [
         {key: "公有資產", icon: <MonetizationOnIcon />},
@@ -109,7 +111,8 @@ class DashboardLayout extends React.Component<any, any> {
         super(props);
         makeObservable(this);
         this.isDrawerOpen = true;
-        this.isDataLayerOpen = true;
+        this.isDataLayerOpen = new ObservableMap<Area, boolean>([]);
+        AppStore.Instance.analysisAreas?.forEach(area => this.isDataLayerOpen.set(area.key, true));
     }
 
     @action private handleDrawerOpen = () => {
@@ -120,8 +123,8 @@ class DashboardLayout extends React.Component<any, any> {
         this.isDrawerOpen = false;
     };
 
-    @action private handleDataLayersClick = () => {
-        this.isDataLayerOpen = !this.isDataLayerOpen;
+    @action private handleDataLayersClick = (area: Area) => {
+        this.isDataLayerOpen.set(area, !this.isDataLayerOpen.get(area));
     };
 
     public render() {
@@ -190,12 +193,12 @@ class DashboardLayout extends React.Component<any, any> {
                                 <ListItemIcon>{area.type === AreaType.CITY ? <LocationCityIcon color="primary" /> : <EmojiNatureIcon color="primary" />}</ListItemIcon>
                                 <ListItemText color="primary" primary={area.key} />
                                 <ListItemSecondaryAction>
-                                    <IconButton edge="end" aria-label="comments" onClick={this.handleDataLayersClick}>
-                                        {this.isDataLayerOpen ? <ExpandLess /> : <ExpandMore />}
+                                    <IconButton edge="end" aria-label="comments" onClick={() => this.handleDataLayersClick(area.key)}>
+                                        {this.isDataLayerOpen.get(area.key) ? <ExpandLess /> : <ExpandMore />}
                                     </IconButton>
                                 </ListItemSecondaryAction>
                             </ListItem>
-                            <Collapse in={this.isDataLayerOpen} timeout="auto" unmountOnExit>
+                            <Collapse in={this.isDataLayerOpen.get(area.key)} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
                                     {area.dataLayers?.map(dataLayer => {
                                         return (
