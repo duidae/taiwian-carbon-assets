@@ -18,6 +18,7 @@ export class AppStore {
         return AppStore.staticInstance;
     }
 
+    @observable selectedArea: string | undefined;
     @observable dataLayers: DataLayer[];
     @observable isDataLayerSelected: ObservableMap<DataLayer, boolean>;
 
@@ -26,18 +27,21 @@ export class AppStore {
         {
             type: AreaType.CITY,
             key: "城市 - 大安區",
-            dataLayers: ["Daan", "Zhongshan"]
+            dataLayers: ["Daan", "Zhongshan"],
+            piChartData: [4344, 5435, 1443, 4443],
         },
         {
             type: AreaType.COUNTRY_SIDE,
             key: "鄉鎮 - 東華",
-            dataLayers: ["Zhongzheng", "Wanhua"]
+            dataLayers: ["Zhongzheng", "Wanhua"],
+            piChartData: [5435, 4344, 4443, 1443],
         },
     ];
 
     private constructor() {
         makeObservable(this);
 
+        this.selectedArea = undefined;
         this.dataLayers = [];
         this.analysisAreas?.forEach(area => this.dataLayers = this.dataLayers.concat(area.dataLayers));
 
@@ -48,6 +52,7 @@ export class AppStore {
     }
 
     @action selectAreaDataLayers = (areaKey: string) => {
+        this.selectedArea = areaKey;
         const dataLayers = this.analysisAreas?.find(area => area.key === areaKey)?.dataLayers;
         let selectionNum = 0;
         dataLayers?.forEach(dataLayer => {
@@ -73,6 +78,10 @@ export class AppStore {
         return dataLayerGeojsonMap;
     }
     */
+
+    @computed get selectedPiChartData(): number[] | undefined {
+        return this.analysisAreas.find(area => area.key === this.selectedArea)?.piChartData;
+    }
 
     @computed get selectedDataLayers(): DataLayer[] {
         let selectedDataLayers: DataLayer[] = [];
