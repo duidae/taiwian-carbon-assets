@@ -15,8 +15,6 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import "./DashboardLayout.scss";
 import {DashboardApp} from "./pages/DashboardApp";
 
@@ -106,7 +104,8 @@ class DashboardLayout extends React.Component<any, any> {
         {key: "公有資產", icon: <MonetizationOnIcon />},
         {key: "碳收支", icon: <EcoIcon />}
     ];
-    private SECONDARY_CONTROLS = [
+
+    private DATA_LAYER_CONTROLS = [
         {key: "城市 - 大安區", icon: <LocationCityIcon />},
         {key: "鄉鎮 - 東華", icon: <EmojiNatureIcon />}
     ];
@@ -190,7 +189,7 @@ class DashboardLayout extends React.Component<any, any> {
                 </List>
                 <Divider />
                 <List>
-                    {this.SECONDARY_CONTROLS.map(controlItem => (
+                    {this.DATA_LAYER_CONTROLS.map(controlItem => (
                         <React.Fragment>
                             <ListItem button key={controlItem.key} onClick={this.handleDataLayersClick}>
                                 <ListItemIcon>{controlItem.icon}</ListItemIcon>
