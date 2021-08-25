@@ -25,7 +25,6 @@ export class GoogleMap extends React.Component<any> {
 
     private loadGeojsons = () => {
         this.dataLayerMap.clear();
-        console.log(AppStore.Instance.dataLayerGeojsonMap);
         AppStore.Instance.dataLayerGeojsonMap?.forEach((geojson, dataLayer) => {
             let data = new google.maps.Data();
             data.loadGeoJson(geojson);
@@ -50,7 +49,6 @@ export class GoogleMap extends React.Component<any> {
     private showSelectedDataLayer = (selectedDataLayers: any) => {
         if (this.map) {
             AppStore.Instance.isDataLayerSelected?.forEach((isSelected, dataLayer) => {
-                console.log(this.dataLayerMap.get(dataLayer));
                 this.dataLayerMap.get(dataLayer)?.setMap(isSelected ? this.map : null);
             });
         }
