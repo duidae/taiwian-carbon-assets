@@ -11,6 +11,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import EcoIcon from "@material-ui/icons/Eco";
 import LayersIcon from "@material-ui/icons/Layers";
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
@@ -20,7 +22,7 @@ import {DashboardApp} from "./pages/DashboardApp";
 
 import {AppStore} from "./stores";
 
-const DRAWER_WIDTH = 200;
+const DRAWER_WIDTH = 250;
 const styles = theme => ({
     root: {
         display: "flex"
@@ -104,7 +106,10 @@ class DashboardLayout extends React.Component<any, any> {
         {key: "公有資產", icon: <MonetizationOnIcon />},
         {key: "碳收支", icon: <EcoIcon />}
     ];
-    private SECONDARY_CONTROLS = [{key: "圖層", icon: <LayersIcon />}];
+    private SECONDARY_CONTROLS = [
+        {key: "城市 - 大安區", icon: <LocationCityIcon />},
+        {key: "鄉鎮 - 東華", icon: <EmojiNatureIcon />}
+    ];
 
     constructor(props: any) {
         super(props);
@@ -197,7 +202,7 @@ class DashboardLayout extends React.Component<any, any> {
                                     {AppStore.Instance.dataLayers?.map(dataLayer => {
                                         return (
                                             <ListItem button className={classes.nested} onClick={() => AppStore.Instance.selectDataLayer(dataLayer)}>
-                                                <ListItemIcon>{AppStore.Instance.isDataLayerSelected?.get(dataLayer) ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}</ListItemIcon>
+                                                <ListItemIcon><LayersIcon color={AppStore.Instance.isDataLayerSelected?.get(dataLayer) ? "primary" : "disabled"} /></ListItemIcon>
                                                 <ListItemText primary={dataLayer} />
                                             </ListItem>
                                         );
