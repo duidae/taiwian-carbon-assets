@@ -2,7 +2,7 @@ import * as React from "react";
 import {observer} from "mobx-react";
 import {action, makeObservable, observable, ObservableMap} from "mobx";
 import clsx from "clsx";
-import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, ListSubheader, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import {createTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
 import {blue} from "@material-ui/core/colors";
 import SearchIcon from "@material-ui/icons/Search";
@@ -81,6 +81,10 @@ const styles = theme => ({
         padding: theme.spacing(0, 1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar
+    },
+    listHeader: {
+        fontSize: 20,
+        fontWeight: 'bold'
     },
     content: {
         flexGrow: 1,
@@ -177,7 +181,7 @@ class DashboardLayout extends React.Component<any, any> {
                     </IconButton>
                     <img className={classes.logo} alt="碳匯城鄉" src="logo.png"/>
                     <Typography variant="h5" noWrap>
-                        碳匯城鄉
+                        {`碳匯城鄉 - 公有資產減碳評估儀表板${AppStore.Instance.selectedArea ? `： [ ${AppStore.Instance.selectedArea} ]` : ""}`}
                     </Typography>
                     {/*
                     <SearchIcon />
@@ -207,7 +211,7 @@ class DashboardLayout extends React.Component<any, any> {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
+                <List subheader={<ListSubheader color="primary" className={classes.listHeader}>{this.isDrawerOpen ? "城鄉評估" : "評"}</ListSubheader>}>
                     {AppStore.Instance.analysisAreas?.map(analysisArea => (
                         <React.Fragment>
                             <ListItem button key={analysisArea.folder} onClick={() => AppStore.Instance.selectAreaLayers(analysisArea.folder)}>
@@ -246,7 +250,7 @@ class DashboardLayout extends React.Component<any, any> {
                     ))}
                 </List>
                 <Divider />
-                <List>
+                <List  subheader={<ListSubheader color="primary" className={classes.listHeader}>{this.isDrawerOpen ? "碳收支" : "碳"}</ListSubheader>}>
                     {this.PRIMARY_CONTROLS.map(controlItem => (
                         <ListItem button key={controlItem.key}>
                             <ListItemIcon>{controlItem.icon}</ListItemIcon>
