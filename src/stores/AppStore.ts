@@ -21,7 +21,7 @@ export class AppStore {
         {
             folder: "城市 - 大安區",
             center: {lat: 25.038357847174, lng: 121.54770626982},
-            layerGeojsons: ["Daan.json", "Zhongshan.json"],
+            layerGeojsons: ["Neihu.json", "Nangang.json"],
             piChartData: [4344, 5435, 1443, 4443],
             forceChartData: [
                 {name: "光電設施", data: [80, 50, 30, 40, 100, 20]},
@@ -59,7 +59,11 @@ export class AppStore {
         this.layerGeojsons?.forEach(layerGeojson => this.isLayerSelected.set(layerGeojson, false));
 
         // Activate first area
-        this.selectedArea = this.analysisAreas?.[0]?.folder;
+        const defaultArea = this.analysisAreas?.[0];
+        this.selectedArea = defaultArea?.folder;
+        defaultArea?.layerGeojsons?.forEach(layerGeojson => {
+            this.isLayerSelected.set(`${defaultArea.folder}/${layerGeojson}`, true);
+        });
     }
 
     @action selectAreaLayers = (area: string) => {
