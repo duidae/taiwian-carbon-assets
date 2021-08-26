@@ -19,7 +19,7 @@ export class AppStore {
 
     public analysisAreas = [
         {
-            folder: "城市 - 大安區",
+            folder: "臺北市大安區",
             center: {lat: 25.038357847174, lng: 121.54770626982},
             layerGeojsons: ["大安區-公有資產.json", "大安區-光電設施.json"],
             piChartData: [4344, 5435, 1443, 4443],
@@ -30,7 +30,7 @@ export class AppStore {
             ]
         },
         {
-            folder: "鄉鎮 - 東華",
+            folder: "花蓮縣東華鄉",
             center: {lat: 25.023556, lng: 121.488929},
             layerGeojsons: ["東華-公有資產.json", "東華-光電設施.json"],
             piChartData: [5435, 4344, 4443, 1443],

@@ -128,7 +128,7 @@ class DashboardLayout extends React.Component<any, any> {
     ]);
 
     private static GET_AREA_TYPE = (areaName: string): AreaType => {
-        return areaName?.includes("城") ? AreaType.CITY : AreaType.COUNTRY_SIDE;
+        return areaName?.includes("市") ? AreaType.CITY : AreaType.COUNTRY_SIDE;
     };
 
     // TODO: find proper type
