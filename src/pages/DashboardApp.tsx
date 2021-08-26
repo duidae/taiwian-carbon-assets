@@ -14,10 +14,10 @@ export const DashboardApp: React.FC = props => {
                 </Grid>
                 <Grid direction={"column"} xs={4}>
                     <Grid item>
-                        <PiChart />
+                        <PiChart data={AppStore.Instance.selectedPiChartData} />
                     </Grid>
                     <Grid item>
-                        <ForceChart />
+                        <ForceChart data={AppStore.Instance.selectedForceChartData} />
                     </Grid>
                 </Grid>
             </Grid>

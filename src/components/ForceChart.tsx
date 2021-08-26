@@ -4,13 +4,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {Card, CardHeader} from "@material-ui/core";
 import BaseOptionChart from "./BaseOptionChart";
 
-const CHART_DATA = [
-    {name: "光電設施", data: [80, 50, 30, 40, 100, 20]},
-    {name: "探捕捉設施", data: [20, 30, 40, 80, 20, 80]},
-    {name: "溼地經營", data: [44, 76, 78, 13, 43, 10]}
-];
-
-export default function AppCurrentSubject() {
+export default function AppCurrentSubject(props) {
     const theme = useTheme();
 
     const chartOptions = merge(BaseOptionChart(), {
@@ -30,7 +24,7 @@ export default function AppCurrentSubject() {
     return (
         <Card>
             <CardHeader title="減碳策略" />
-            <ReactApexChart type="radar" series={CHART_DATA} options={chartOptions} />
+            <ReactApexChart type="radar" series={props.data} options={chartOptions} />
         </Card>
     );
 }

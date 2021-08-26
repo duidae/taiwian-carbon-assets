@@ -4,9 +4,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {Card, CardHeader} from "@material-ui/core";
 import BaseOptionChart from "./BaseOptionChart";
 
-const CHART_DATA = [4344, 5435, 1443, 4443];
-
-export default function PiChart() {
+export default function PiChart(props) {
     const theme = useTheme();
     const chartOptions = merge(BaseOptionChart(), {
         colors: [theme.palette.primary.main, theme.palette.info.main, theme.palette.warning.main, theme.palette.error.main],
@@ -31,7 +29,7 @@ export default function PiChart() {
     return (
         <Card>
             <CardHeader title="公有資產盤點" />
-            <ReactApexChart type="pie" series={CHART_DATA} options={chartOptions} />
+            <ReactApexChart type="pie" series={props.data} options={chartOptions} />
         </Card>
     );
 }

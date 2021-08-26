@@ -22,11 +22,21 @@ export class AppStore {
             folder: "城市 - 大安區",
             layerGeojsons: ["Daan.json", "Zhongshan.json"],
             piChartData: [4344, 5435, 1443, 4443],
+            forceChartData: [
+                {name: "光電設施", data: [80, 50, 30, 40, 100, 20]},
+                {name: "探捕捉設施", data: [20, 30, 40, 80, 20, 80]},
+                {name: "溼地經營", data: [44, 76, 78, 13, 43, 10]}
+            ]
         },
         {
             folder: "鄉鎮 - 東華",
             layerGeojsons: ["Zhongzheng.json", "Wanhua.json"],
             piChartData: [5435, 4344, 4443, 1443],
+            forceChartData: [
+                {name: "光電設施", data: [20, 30, 40, 80, 20, 80]},
+                {name: "探捕捉設施", data: [80, 50, 30, 40, 100, 20]},
+                {name: "溼地經營", data: [44, 76, 78, 13, 43, 10]}
+            ]
         },
     ];
 
@@ -75,6 +85,10 @@ export class AppStore {
 
     @computed get selectedPiChartData(): number[] | undefined {
         return this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea)?.piChartData;
+    }
+
+    @computed get selectedForceChartData(): any[] | undefined {
+        return this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea)?.forceChartData;
     }
 
     @computed get selectedLayers(): LayerGeojson[] {
