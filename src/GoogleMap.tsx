@@ -45,6 +45,7 @@ export class GoogleMap extends React.Component<any> {
     private initMap = (map: any, maps: any) => {
         this.map = map;
         this.loadGeojsons();
+        this.showSelectedLayers(AppStore.Instance.selectedLayers);
     };
 
     private showSelectedLayers = (selectedLayers: any) => {
@@ -61,7 +62,7 @@ export class GoogleMap extends React.Component<any> {
                 <GoogleMapReact
                     bootstrapURLKeys={{key: "YOUR_GOOGLE_APP_KEY"}}
                     defaultCenter={TAIPEI_CENTER}
-                    defaultZoom={13}
+                    defaultZoom={12}
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}
                     onGoogleApiLoaded={({map, maps}) => this.initMap(map, maps)}

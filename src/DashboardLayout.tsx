@@ -122,6 +122,11 @@ class DashboardLayout extends React.Component<any, any> {
         return areaName?.includes("城") ? AreaType.CITY : AreaType.COUNTRY_SIDE;
     };
 
+    // TODO: find proper type
+    private static GET_LAYER_ICON = (index: number, isActive: boolean): JSX.Element | undefined => {
+        return DashboardLayout.DATA_LAYER_ICON.get(index === 0 ? LayerType.PUBLIC_ASSET : LayerType.OTHERS);
+    };
+
     private PRIMARY_CONTROLS = [{key: "碳收支", icon: <EcoIcon />}];
 
     constructor(props: any) {
