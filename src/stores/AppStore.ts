@@ -31,7 +31,7 @@ export class AppStore {
         },
         {
             folder: "鄉鎮 - 東華",
-            center: {lat: 25.038357847174, lng: 121.54770626982},
+            center: {lat: 25.023556, lng: 121.488929},
             layerGeojsons: ["Zhongzheng.json", "Wanhua.json"],
             piChartData: [5435, 4344, 4443, 1443],
             forceChartData: [
