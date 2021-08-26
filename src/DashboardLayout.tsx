@@ -4,7 +4,7 @@ import {action, makeObservable, observable, ObservableMap} from "mobx";
 import clsx from "clsx";
 import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import {createTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
-import {blue, lightGreen} from "@material-ui/core/colors";
+import {blue} from "@material-ui/core/colors";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -16,11 +16,9 @@ import LocationCityIcon from "@material-ui/icons/LocationCity";
 import EmojiNatureIcon from "@material-ui/icons/EmojiNature";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import "./DashboardLayout.scss";
 import {DashboardApp} from "./pages/DashboardApp";
 
 import {AppStore} from "./stores";
-import { light } from "@material-ui/core/styles/createPalette";
 
 const DRAWER_WIDTH = 250;
 const styles = theme => ({
@@ -44,6 +42,11 @@ const styles = theme => ({
     },
     menuButton: {
         marginRight: 36
+    },
+    logo: {
+        width: 32,
+        height: 32,
+        marginRight: 10
     },
     hide: {
         display: "none"
@@ -172,7 +175,8 @@ class DashboardLayout extends React.Component<any, any> {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
+                    <img className={classes.logo} alt="碳匯城鄉" src="logo.png"/>
+                    <Typography variant="h5" noWrap>
                         碳匯城鄉
                     </Typography>
                     {/*
