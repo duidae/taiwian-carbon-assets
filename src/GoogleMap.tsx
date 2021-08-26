@@ -4,29 +4,30 @@ import {observer} from "mobx-react";
 import GoogleMapReact from "google-map-react";
 import "./GoogleMap.scss";
 
-import {AppStore} from "./stores";
+import {AppStore, LayerGeojson} from "./stores";
 
 const TAIPEI_CENTER = {lat: 25.038357847174, lng: 121.54770626982};
 
 @observer
 export class GoogleMap extends React.Component<any> {
     private map: any;
-    private dataLayerMap: Map<string, google.maps.Data>;
+    private dataLayerMap: Map<LayerGeojson, google.maps.Data>;
 
     constructor(props) {
         super(props);
 
-        this.dataLayerMap = new Map<string, google.maps.Data>([]);
+        this.dataLayerMap = new Map<LayerGeojson, google.maps.Data>([]);
 
         autorun(() => {
-            this.showSelectedDataLayer(AppStore.Instance.selectedDataLayers);
+            this.showSelectedLayers(AppStore.Instance.selectedLayers);
         });
     }
 
     private loadGeojsons = () => {
         this.dataLayerMap.clear();
-        AppStore.Instance.dataLayerGeojsonMap?.forEach((geojson, dataLayer) => {
+        AppStore.Instance.layerGeojsons?.forEach(layerGeojson => {
             let data = new google.maps.Data();
+            const geojson = layerGeojson.replace(/^.*\//, ""); // TODO: delete this when support folder structure
             data.loadGeoJson(geojson);
             data.setStyle((feature: any) => {
                 const color = feature.getProperty("status") === "有效" ? "green" : "gray";
@@ -36,8 +37,8 @@ export class GoogleMap extends React.Component<any> {
                     clickable: true
                 };
             });
-            this.dataLayerMap.set(dataLayer, data);
-            console.log(`${dataLayer}(${geojson}) loaded.`);
+            this.dataLayerMap.set(layerGeojson, data);
+            console.log(`${geojson} loaded.`);
         });
     };
 
@@ -46,10 +47,10 @@ export class GoogleMap extends React.Component<any> {
         this.loadGeojsons();
     };
 
-    private showSelectedDataLayer = (selectedDataLayers: any) => {
+    private showSelectedLayers = (selectedLayers: any) => {
         if (this.map) {
-            AppStore.Instance.isDataLayerSelected?.forEach((isSelected, dataLayer) => {
-                this.dataLayerMap.get(dataLayer)?.setMap(isSelected ? this.map : null);
+            AppStore.Instance.isLayerSelected?.forEach((isSelected, layerGeojson) => {
+                this.dataLayerMap.get(layerGeojson)?.setMap(isSelected ? this.map : null);
             });
         }
     };

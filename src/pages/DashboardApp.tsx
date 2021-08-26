@@ -3,6 +3,8 @@ import {GoogleMap} from "../GoogleMap";
 import PiChart from "../components/PiChart";
 import ForceChart from "../components/ForceChart";
 
+import {AppStore} from "../stores";
+
 export const DashboardApp: React.FC = props => {
     return (
         <Container maxWidth="xl">
