@@ -3,7 +3,7 @@ import {observer} from "mobx-react";
 import {action, makeObservable, observable, ObservableMap} from "mobx";
 import clsx from "clsx";
 import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
-import {withStyles} from "@material-ui/core/styles";
+import {createTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
 import {blue, lightGreen} from "@material-ui/core/colors";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -20,6 +20,7 @@ import "./DashboardLayout.scss";
 import {DashboardApp} from "./pages/DashboardApp";
 
 import {AppStore} from "./stores";
+import { light } from "@material-ui/core/styles/createPalette";
 
 const DRAWER_WIDTH = 250;
 const styles = theme => ({
@@ -87,14 +88,15 @@ const styles = theme => ({
     }
 });
 
-/*
-  const theme = createTheme({
-      palette: {
-          primary: lightGreen,
-          secondary: blue,
-      }
-  });
-*/
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#2e7d32',
+        },
+        secondary: blue,
+    }
+});
 
 enum AreaType {
     CITY,
@@ -253,8 +255,10 @@ class DashboardLayout extends React.Component<any, any> {
 
         return (
             <div className={classes.root}>
-                {appBar}
-                {drawer}
+                <ThemeProvider theme={theme}>
+                    {appBar}
+                    {drawer}
+                </ThemeProvider>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <DashboardApp />
