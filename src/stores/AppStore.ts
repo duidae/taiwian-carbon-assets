@@ -20,6 +20,7 @@ export class AppStore {
     public analysisAreas = [
         {
             folder: "城市 - 大安區",
+            center: {lat: 25.038357847174, lng: 121.54770626982},
             layerGeojsons: ["Daan.json", "Zhongshan.json"],
             piChartData: [4344, 5435, 1443, 4443],
             forceChartData: [
@@ -30,6 +31,7 @@ export class AppStore {
         },
         {
             folder: "鄉鎮 - 東華",
+            center: {lat: 25.038357847174, lng: 121.54770626982},
             layerGeojsons: ["Zhongzheng.json", "Wanhua.json"],
             piChartData: [5435, 4344, 4443, 1443],
             forceChartData: [
