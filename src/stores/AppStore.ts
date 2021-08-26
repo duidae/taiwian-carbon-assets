@@ -70,14 +70,9 @@ export class AppStore {
         const analysisArea = this.analysisAreas?.find(analysisArea => analysisArea.folder === area);
         if (analysisArea) {
             this.selectedArea = area;
-            let selectionNum = 0;
-            analysisArea.layerGeojsons?.forEach(layerGeojson => {
-                if (this.isLayerSelected.get(`${analysisArea.folder}/${layerGeojson}`)) {
-                    selectionNum++;
-                }
-            });
-            analysisArea.layerGeojsons?.forEach(layerGeojson => {
-                this.isLayerSelected.set(`${analysisArea.folder}/${layerGeojson}`, selectionNum === analysisArea.layerGeojsons?.length ? false : true);
+            const layerGeojsonPaths = analysisArea.layerGeojsons.map(layerGeojson => {return `${analysisArea.folder}/${layerGeojson}`});
+            this.isLayerSelected?.forEach((isSelected, layerGeojson) => {
+                this.isLayerSelected.set(layerGeojson, layerGeojsonPaths.includes(layerGeojson) ? true : false);
             });
         }
     };
