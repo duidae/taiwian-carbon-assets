@@ -9,11 +9,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 import EcoIcon from "@material-ui/icons/Eco";
 import LayersIcon from "@material-ui/icons/Layers";
-import LocationCityIcon from '@material-ui/icons/LocationCity';
-import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
+import LocationCityIcon from "@material-ui/icons/LocationCity";
+import EmojiNatureIcon from "@material-ui/icons/EmojiNature";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import "./DashboardLayout.scss";
@@ -119,12 +119,10 @@ class DashboardLayout extends React.Component<any, any> {
     ]);
 
     private static GET_AREA_TYPE = (areaName: string): AreaType => {
-        return areaName?.includes("城") ? AreaType.CITY : AreaType.COUNTRY_SIDE; 
+        return areaName?.includes("城") ? AreaType.CITY : AreaType.COUNTRY_SIDE;
     };
 
-    private PRIMARY_CONTROLS = [
-        {key: "碳收支", icon: <EcoIcon />}
-    ];
+    private PRIMARY_CONTROLS = [{key: "碳收支", icon: <EcoIcon />}];
 
     constructor(props: any) {
         super(props);
@@ -202,15 +200,21 @@ class DashboardLayout extends React.Component<any, any> {
                     {AppStore.Instance.analysisAreas?.map(analysisArea => (
                         <React.Fragment>
                             <ListItem button key={analysisArea.folder} onClick={() => AppStore.Instance.selectAreaLayers(analysisArea.folder)}>
-                                <ListItemIcon>{DashboardLayout.GET_AREA_TYPE(analysisArea.folder) === AreaType.CITY ? <LocationCityIcon color="primary" /> : <EmojiNatureIcon color="primary" />}</ListItemIcon>
-                                <ListItemText color="primary" primary={analysisArea.folder} />
-                                {this.isDrawerOpen &&
-                                <ListItemSecondaryAction>
-                                    <IconButton edge="end" aria-label="comments" onClick={() => this.handleAreaOpenClick(analysisArea.folder)}>
-                                        {this.isAreaOpen.get(analysisArea.folder) ? <ExpandLess /> : <ExpandMore />}
-                                    </IconButton>
-                                </ListItemSecondaryAction>
-                                }
+                                <ListItemIcon>
+                                    {DashboardLayout.GET_AREA_TYPE(analysisArea.folder) === AreaType.CITY ? (
+                                        <LocationCityIcon color={AppStore.Instance.selectedArea === analysisArea.folder ? "primary" : "disabled"} />
+                                    ) : (
+                                        <EmojiNatureIcon color={AppStore.Instance.selectedArea === analysisArea.folder ? "primary" : "disabled"} />
+                                    )}
+                                </ListItemIcon>
+                                <ListItemText primary={analysisArea.folder} />
+                                {this.isDrawerOpen && (
+                                    <ListItemSecondaryAction>
+                                        <IconButton edge="end" aria-label="comments" onClick={() => this.handleAreaOpenClick(analysisArea.folder)}>
+                                            {this.isAreaOpen.get(analysisArea.folder) ? <ExpandLess /> : <ExpandMore />}
+                                        </IconButton>
+                                    </ListItemSecondaryAction>
+                                )}
                             </ListItem>
                             <Collapse in={this.isAreaOpen.get(analysisArea.folder)} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
@@ -218,7 +222,9 @@ class DashboardLayout extends React.Component<any, any> {
                                         const layerGeojsonPath = `${analysisArea.folder}/${layerGeojson}`;
                                         return (
                                             <ListItem button className={classes.nested} onClick={() => AppStore.Instance.selectLayer(layerGeojsonPath)}>
-                                                <ListItemIcon><LayersIcon color={AppStore.Instance.isLayerSelected?.get(layerGeojsonPath) ? "primary" : "disabled"} /></ListItemIcon>
+                                                <ListItemIcon>
+                                                    <LayersIcon color={AppStore.Instance.isLayerSelected?.get(layerGeojsonPath) ? "primary" : "disabled"} />
+                                                </ListItemIcon>
                                                 <ListItemText primary={layerGeojson.replace(/json$/, "")} />
                                             </ListItem>
                                         );

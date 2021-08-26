@@ -39,14 +39,21 @@ export class AppStore {
                 {name: "探捕捉設施", data: [80, 50, 30, 40, 100, 20]},
                 {name: "溼地經營", data: [44, 76, 78, 13, 43, 10]}
             ]
-        },
+        }
     ];
 
     private constructor() {
         makeObservable(this);
 
         this.layerGeojsons = [];
-        this.analysisAreas?.forEach(area => this.layerGeojsons = this.layerGeojsons.concat(area.layerGeojsons.map(layerGeojson => {return `${area.folder}/${layerGeojson}`;})));
+        this.analysisAreas?.forEach(
+            area =>
+                (this.layerGeojsons = this.layerGeojsons.concat(
+                    area.layerGeojsons.map(layerGeojson => {
+                        return `${area.folder}/${layerGeojson}`;
+                    })
+                ))
+        );
 
         this.isLayerSelected = new ObservableMap<LayerGeojson, boolean>([]);
         this.layerGeojsons?.forEach(layerGeojson => this.isLayerSelected.set(layerGeojson, false));
