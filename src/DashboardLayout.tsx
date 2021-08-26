@@ -225,7 +225,7 @@ class DashboardLayout extends React.Component<any, any> {
                                                 <ListItemIcon>
                                                     <LayersIcon color={AppStore.Instance.isLayerSelected?.get(layerGeojsonPath) ? "primary" : "disabled"} />
                                                 </ListItemIcon>
-                                                <ListItemText primary={layerGeojson.replace(/json$/, "")} />
+                                                <ListItemText primary={layerGeojson.replace(/\.json$/, "")} />
                                             </ListItem>
                                         );
                                     })}
