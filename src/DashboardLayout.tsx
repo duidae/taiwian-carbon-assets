@@ -17,12 +17,13 @@ import EmojiNatureIcon from "@material-ui/icons/EmojiNature";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
-import {DashboardContentComponent} from "./pages/DashboardApp";
+import {DashboardContentComponent} from "./pages/DashboardContent";
 import {AppStore} from "./stores";
 
 const DRAWER_WIDTH = 250;
 const styles = theme => ({
     root: {
+        height: '100%',
         display: "flex"
     },
     appBar: {
@@ -87,8 +88,9 @@ const styles = theme => ({
         fontWeight: 'bold'
     },
     content: {
-        flexGrow: 1,
-        padding: theme.spacing(3)
+        width: '100%',
+        height: '100%',
+        // padding: theme.spacing(3)
     },
     nested: {
         paddingLeft: theme.spacing(3)

@@ -7,12 +7,15 @@ import {AppStore} from "../stores";
 
 const styles = theme => ({
     root: {
+        paddingTop: '15px',
+        paddingBottom: '15px'
     }
 });
 
 function DashboardContent(props) {
+    const classes = props.classes;
     return (
-        <Container maxWidth="xl">
+        <Container className={classes.root} maxWidth="xl">
             <Grid container direction={"row"} spacing={2}>
                 <Grid item xs={8}>
                     <GoogleMap />
