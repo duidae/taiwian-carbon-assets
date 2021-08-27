@@ -4,7 +4,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {Card, CardHeader} from "@material-ui/core";
 import BaseOptionChart from "./BaseOptionChart";
 
-export default function AppCurrentSubject(props) {
+export const ForceChart = (props) => {
     const theme = useTheme();
 
     const chartOptions = merge(BaseOptionChart(), {
@@ -27,4 +27,4 @@ export default function AppCurrentSubject(props) {
             <ReactApexChart type="radar" series={props.data} options={chartOptions} />
         </Card>
     );
-}
+};

@@ -1,11 +1,16 @@
 import {Grid, Container} from "@material-ui/core";
-import {GoogleMap} from "../GoogleMap";
-import PiChart from "../components/PiChart";
-import ForceChart from "../components/ForceChart";
+import {withStyles} from "@material-ui/core/styles";
 
+import {GoogleMap} from "../GoogleMap";
+import {PiChart, ForceChart} from "../components";
 import {AppStore} from "../stores";
 
-export const DashboardApp: React.FC = props => {
+const styles = theme => ({
+    root: {
+    }
+});
+
+function DashboardContent(props) {
     return (
         <Container maxWidth="xl">
             <Grid container direction={"row"} spacing={2}>
@@ -24,3 +29,5 @@ export const DashboardApp: React.FC = props => {
         </Container>
     );
 };
+
+export const DashboardContentComponent = withStyles(styles as {})(DashboardContent);

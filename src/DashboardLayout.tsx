@@ -16,8 +16,8 @@ import LocationCityIcon from "@material-ui/icons/LocationCity";
 import EmojiNatureIcon from "@material-ui/icons/EmojiNature";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import {DashboardApp} from "./pages/DashboardApp";
 
+import {DashboardContentComponent} from "./pages/DashboardApp";
 import {AppStore} from "./stores";
 
 const DRAWER_WIDTH = 250;
@@ -269,7 +269,7 @@ class DashboardLayout extends React.Component<any, any> {
                 </ThemeProvider>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <DashboardApp />
+                    <DashboardContentComponent />
                 </main>
             </div>
         );
