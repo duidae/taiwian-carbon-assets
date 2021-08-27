@@ -1,10 +1,17 @@
 import {merge} from "lodash";
 import ReactApexChart from "react-apexcharts";
-import {useTheme} from "@material-ui/core/styles";
+import {withStyles, useTheme} from "@material-ui/core/styles";
 import {Card, CardHeader} from "@material-ui/core";
 import BaseOptionChart from "./BaseOptionChart";
 
-export const PiChart = props => {
+const styles = theme => ({
+    root: {
+        height: '100%',
+    },
+});
+
+function PiChart(props) {
+    const classes = props.classes;
     const theme = useTheme();
     const chartOptions = merge(BaseOptionChart(), {
         colors: [theme.palette.primary.main, theme.palette.info.main, theme.palette.warning.main, theme.palette.error.main],
@@ -27,9 +34,11 @@ export const PiChart = props => {
     });
 
     return (
-        <Card>
+        <Card className={classes.root}>
             <CardHeader title="公有資產盤點" />
-            <ReactApexChart type="pie" series={props.data} options={chartOptions} />
+            <ReactApexChart className={classes.chart} type="pie" series={props.data} options={chartOptions} height={"80%"} />
         </Card>
     );
-};
+}
+
+export const PiChartComponent = withStyles(styles as {})(PiChart);

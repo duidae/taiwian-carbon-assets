@@ -31,7 +31,7 @@ function ForceChart(props) {
     return (
         <Card className={classes.root}>
             <CardHeader title="減碳策略" />
-            <ReactApexChart type="radar" series={props.data} options={chartOptions} />
+            <ReactApexChart type="radar" series={props.data} options={chartOptions} height={"80%"} />
         </Card>
     );
 }
