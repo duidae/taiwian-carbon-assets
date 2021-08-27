@@ -8,6 +8,9 @@ const styles = theme => ({
     root: {
         height: '100%',
     },
+    chart: {
+        height: 'calc(100% - 64px)'
+    }
 });
 
 function PiChart(props) {
@@ -36,7 +39,9 @@ function PiChart(props) {
     return (
         <Card className={classes.root}>
             <CardHeader title="公有資產盤點" />
-            <ReactApexChart className={classes.chart} type="pie" series={props.data} options={chartOptions} height={"80%"} />
+            <div className={classes.chart}>
+                <ReactApexChart className={classes.chart} type="pie" series={props.data} options={chartOptions} height={"95%"} />
+            </div>
         </Card>
     );
 }

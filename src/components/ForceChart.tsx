@@ -7,6 +7,9 @@ import BaseOptionChart from "./BaseOptionChart";
 const styles = theme => ({
     root: {
         height: '100%',
+    },
+    chart: {
+        height: 'calc(100% - 64px)'
     }
 });
 
@@ -31,7 +34,9 @@ function ForceChart(props) {
     return (
         <Card className={classes.root}>
             <CardHeader title="減碳策略" />
-            <ReactApexChart type="radar" series={props.data} options={chartOptions} height={"80%"} />
+            <div className={classes.chart}>
+                <ReactApexChart type="radar" series={props.data} options={chartOptions} height={"95%"} />
+            </div>
         </Card>
     );
 }
