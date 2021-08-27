@@ -7,8 +7,8 @@ import {AppStore} from "../stores";
 
 const styles = theme => ({
     root: {
-        paddingTop: '15px',
-        paddingBottom: '15px'
+        paddingTop: "15px",
+        paddingBottom: "15px"
     }
 });
 
@@ -31,6 +31,6 @@ function DashboardContent(props) {
             </Grid>
         </Container>
     );
-};
+}
 
 export const DashboardContentComponent = withStyles(styles as {})(DashboardContent);

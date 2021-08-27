@@ -4,7 +4,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {Card, CardHeader} from "@material-ui/core";
 import BaseOptionChart from "./BaseOptionChart";
 
-export const ForceChart = (props) => {
+export const ForceChart = props => {
     const theme = useTheme();
 
     const chartOptions = merge(BaseOptionChart(), {

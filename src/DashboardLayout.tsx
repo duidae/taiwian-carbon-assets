@@ -23,7 +23,7 @@ import {AppStore} from "./stores";
 const DRAWER_WIDTH = 250;
 const styles = theme => ({
     root: {
-        height: '100%',
+        height: "100%",
         display: "flex"
     },
     appBar: {
@@ -85,11 +85,11 @@ const styles = theme => ({
     },
     listHeader: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: "bold"
     },
     content: {
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%"
         // padding: theme.spacing(3)
     },
     nested: {
@@ -97,13 +97,12 @@ const styles = theme => ({
     }
 });
 
-
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#2e7d32',
+            main: "#2e7d32"
         },
-        secondary: blue,
+        secondary: blue
     }
 });
 
@@ -181,7 +180,7 @@ class DashboardLayout extends React.Component<any, any> {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <img className={classes.logo} alt="碳匯城鄉" src="logo.png"/>
+                    <img className={classes.logo} alt="碳匯城鄉" src="logo.png" />
                     <Typography variant="h5" noWrap>
                         {`碳匯城鄉 - 公有資產減碳評估儀表板${AppStore.Instance.selectedArea ? `： [ ${AppStore.Instance.selectedArea} ]` : ""}`}
                     </Typography>
@@ -213,7 +212,13 @@ class DashboardLayout extends React.Component<any, any> {
                     </IconButton>
                 </div>
                 <Divider />
-                <List subheader={<ListSubheader color="primary" className={classes.listHeader}>{this.isDrawerOpen ? "城鄉評估" : "評"}</ListSubheader>}>
+                <List
+                    subheader={
+                        <ListSubheader color="primary" className={classes.listHeader}>
+                            {this.isDrawerOpen ? "城鄉評估" : "評"}
+                        </ListSubheader>
+                    }
+                >
                     {AppStore.Instance.analysisAreas?.map(analysisArea => (
                         <React.Fragment>
                             <ListItem key={`list-${analysisArea.folder}`} button onClick={() => AppStore.Instance.selectAreaLayers(analysisArea.folder)}>
@@ -252,7 +257,13 @@ class DashboardLayout extends React.Component<any, any> {
                     ))}
                 </List>
                 <Divider />
-                <List subheader={<ListSubheader color="primary" className={classes.listHeader}>{this.isDrawerOpen ? "碳收支" : "碳"}</ListSubheader>}>
+                <List
+                    subheader={
+                        <ListSubheader color="primary" className={classes.listHeader}>
+                            {this.isDrawerOpen ? "碳收支" : "碳"}
+                        </ListSubheader>
+                    }
+                >
                     {this.PRIMARY_CONTROLS.map(controlItem => (
                         <ListItem button key={controlItem.key}>
                             <ListItemIcon>{controlItem.icon}</ListItemIcon>

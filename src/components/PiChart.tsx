@@ -4,7 +4,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {Card, CardHeader} from "@material-ui/core";
 import BaseOptionChart from "./BaseOptionChart";
 
-export const PiChart = (props) => {
+export const PiChart = props => {
     const theme = useTheme();
     const chartOptions = merge(BaseOptionChart(), {
         colors: [theme.palette.primary.main, theme.palette.info.main, theme.palette.warning.main, theme.palette.error.main],

@@ -70,7 +70,9 @@ export class AppStore {
         const analysisArea = this.analysisAreas?.find(analysisArea => analysisArea.folder === area);
         if (analysisArea) {
             this.selectedArea = area;
-            const layerGeojsonPaths = analysisArea.layerGeojsons.map(layerGeojson => {return `${analysisArea.folder}/${layerGeojson}`});
+            const layerGeojsonPaths = analysisArea.layerGeojsons.map(layerGeojson => {
+                return `${analysisArea.folder}/${layerGeojson}`;
+            });
             this.isLayerSelected?.forEach((isSelected, layerGeojson) => {
                 this.isLayerSelected.set(layerGeojson, layerGeojsonPaths.includes(layerGeojson) ? true : false);
             });
