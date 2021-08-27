@@ -7,8 +7,11 @@ import {AppStore} from "../stores";
 
 const styles = theme => ({
     root: {
+        height: 'calc(100% - 64px)',
         paddingTop: "15px",
-        paddingBottom: "15px"
+    },
+    gridContainer: {
+        height: "100%"
     }
 });
 
@@ -16,7 +19,7 @@ function DashboardContent(props) {
     const classes = props.classes;
     return (
         <Container className={classes.root} maxWidth="xl">
-            <Grid container direction={"row"} spacing={2}>
+            <Grid className={classes.gridContainer} container direction={"row"} spacing={2}>
                 <Grid item xs={8}>
                     <GoogleMap />
                 </Grid>
