@@ -2,7 +2,7 @@ import {Grid, Container} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 
 import {GoogleMap} from "../GoogleMap";
-import {PiChart, ForceChart} from "../components";
+import {PiChart, ForceChartComponent} from "../components";
 import {AppStore} from "../stores";
 
 const styles = theme => ({
@@ -12,6 +12,13 @@ const styles = theme => ({
     },
     gridContainer: {
         height: "100%"
+    },
+    chartContainer: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    chart: {
+        flex: 1,
     }
 });
 
@@ -23,12 +30,12 @@ function DashboardContent(props) {
                 <Grid item xs={8}>
                     <GoogleMap />
                 </Grid>
-                <Grid direction={"column"} xs={4}>
-                    <Grid item>
+                <Grid item xs={4} className={classes.chartContainer}>
+                    <Grid item className={classes.chart}>
                         <PiChart data={AppStore.Instance.selectedPiChartData} />
                     </Grid>
-                    <Grid item>
-                        <ForceChart data={AppStore.Instance.selectedForceChartData} />
+                    <Grid item className={classes.chart}>
+                        <ForceChartComponent data={AppStore.Instance.selectedForceChartData} />
                     </Grid>
                 </Grid>
             </Grid>

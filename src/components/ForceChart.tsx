@@ -1,10 +1,17 @@
 import {merge} from "lodash";
 import ReactApexChart from "react-apexcharts";
-import {useTheme} from "@material-ui/core/styles";
+import {withStyles, useTheme} from "@material-ui/core/styles";
 import {Card, CardHeader} from "@material-ui/core";
 import BaseOptionChart from "./BaseOptionChart";
 
-export const ForceChart = props => {
+const styles = theme => ({
+    root: {
+        height: '100%',
+    }
+});
+
+function ForceChart(props) {
+    const classes = props.classes;
     const theme = useTheme();
 
     const chartOptions = merge(BaseOptionChart(), {
@@ -22,9 +29,11 @@ export const ForceChart = props => {
     });
 
     return (
-        <Card>
+        <Card className={classes.root}>
             <CardHeader title="減碳策略" />
             <ReactApexChart type="radar" series={props.data} options={chartOptions} />
         </Card>
     );
-};
+}
+
+export const ForceChartComponent = withStyles(styles as {})(ForceChart);
