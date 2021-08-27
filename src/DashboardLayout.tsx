@@ -214,7 +214,7 @@ class DashboardLayout extends React.Component<any, any> {
                 <List subheader={<ListSubheader color="primary" className={classes.listHeader}>{this.isDrawerOpen ? "城鄉評估" : "評"}</ListSubheader>}>
                     {AppStore.Instance.analysisAreas?.map(analysisArea => (
                         <React.Fragment>
-                            <ListItem button key={analysisArea.folder} onClick={() => AppStore.Instance.selectAreaLayers(analysisArea.folder)}>
+                            <ListItem key={`list-${analysisArea.folder}`} button onClick={() => AppStore.Instance.selectAreaLayers(analysisArea.folder)}>
                                 <ListItemIcon>
                                     {DashboardLayout.GET_AREA_TYPE(analysisArea.folder) === AreaType.CITY ? (
                                         <LocationCityIcon color={AppStore.Instance.selectedArea === analysisArea.folder ? "primary" : "disabled"} />
@@ -231,12 +231,12 @@ class DashboardLayout extends React.Component<any, any> {
                                     </ListItemSecondaryAction>
                                 )}
                             </ListItem>
-                            <Collapse in={this.isAreaOpen.get(analysisArea.folder)} timeout="auto" unmountOnExit>
+                            <Collapse key={`collapse-${analysisArea.folder}`} in={this.isAreaOpen.get(analysisArea.folder)} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
                                     {analysisArea.layerGeojsons?.map(layerGeojson => {
                                         const layerGeojsonPath = `${analysisArea.folder}/${layerGeojson}`;
                                         return (
-                                            <ListItem button className={classes.nested} onClick={() => AppStore.Instance.selectLayer(layerGeojsonPath)}>
+                                            <ListItem key={layerGeojson} button className={classes.nested} onClick={() => AppStore.Instance.selectLayer(layerGeojsonPath)}>
                                                 <ListItemIcon>
                                                     <LayersIcon color={AppStore.Instance.isLayerSelected?.get(layerGeojsonPath) ? "primary" : "disabled"} />
                                                 </ListItemIcon>
@@ -250,7 +250,7 @@ class DashboardLayout extends React.Component<any, any> {
                     ))}
                 </List>
                 <Divider />
-                <List  subheader={<ListSubheader color="primary" className={classes.listHeader}>{this.isDrawerOpen ? "碳收支" : "碳"}</ListSubheader>}>
+                <List subheader={<ListSubheader color="primary" className={classes.listHeader}>{this.isDrawerOpen ? "碳收支" : "碳"}</ListSubheader>}>
                     {this.PRIMARY_CONTROLS.map(controlItem => (
                         <ListItem button key={controlItem.key}>
                             <ListItemIcon>{controlItem.icon}</ListItemIcon>
