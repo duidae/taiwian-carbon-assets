@@ -6,10 +6,10 @@ import BaseOptionChart from "./BaseOptionChart";
 
 const styles = theme => ({
     root: {
-        height: '100%',
+        height: "100%"
     },
     chart: {
-        height: 'calc(100% - 64px)'
+        height: "calc(100% - 64px)"
     }
 });
 

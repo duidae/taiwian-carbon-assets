@@ -7,18 +7,18 @@ import {AppStore} from "../stores";
 
 const styles = theme => ({
     root: {
-        height: 'calc(100% - 64px)',
-        paddingTop: "15px",
+        height: "calc(100% - 64px)",
+        paddingTop: "15px"
     },
     gridContainer: {
         height: "100%"
     },
     chartContainer: {
-        display: 'flex',
-        flexDirection: 'column'
+        display: "flex",
+        flexDirection: "column"
     },
     chart: {
-        flex: 1,
+        flex: 1
     }
 });
 

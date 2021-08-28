@@ -17,33 +17,48 @@ enum LayerType {
 }
 
 const LAYER_STYLE_MAP = new Map<LayerType, any>([
-    [LayerType.Border, {
-        strokeColor: "green",
-        strokeWeight: 5,
-        fillOpacity: 0,
-        clickable: false
-    }],
-    [LayerType.Building, {
-        strokeColor: "gray",
-        fillColor: "gray",
-        clickable: false
-    }],
-    [LayerType.PublicAsset, {
-        strokeColor: "darkGoldenRod",
-        fillColor: "darkGoldenRod",
-        clickable: false
-    }],
-    [LayerType.GreenFacility, {
-        strokeColor: "green",
-        fillColor: "green",
-        clickable: false
-    }],
-    [LayerType.Others, {
-        strokeColor: "green",
-        strokeWeight: 5,
-        fillOpacity: 0,
-        clickable: false
-    }]
+    [
+        LayerType.Border,
+        {
+            strokeColor: "green",
+            strokeWeight: 5,
+            fillOpacity: 0,
+            clickable: false
+        }
+    ],
+    [
+        LayerType.Building,
+        {
+            strokeColor: "gray",
+            fillColor: "gray",
+            clickable: false
+        }
+    ],
+    [
+        LayerType.PublicAsset,
+        {
+            strokeColor: "darkGoldenRod",
+            fillColor: "darkGoldenRod",
+            clickable: false
+        }
+    ],
+    [
+        LayerType.GreenFacility,
+        {
+            strokeColor: "green",
+            fillColor: "green",
+            clickable: false
+        }
+    ],
+    [
+        LayerType.Others,
+        {
+            strokeColor: "green",
+            strokeWeight: 5,
+            fillOpacity: 0,
+            clickable: false
+        }
+    ]
 ]);
 
 const FindLayerStyle = (jsonName: string): LayerType => {
@@ -80,7 +95,9 @@ export class GoogleMap extends React.Component<any> {
             let data = new google.maps.Data();
             const geojson = layerGeojson.replace(/^.*\//, ""); // TODO: delete this when support folder structure
             data.loadGeoJson(geojson);
-            data.setStyle((feature: any) => {return LAYER_STYLE_MAP.get(FindLayerStyle(geojson) ?? LayerType.Others)});
+            data.setStyle((feature: any) => {
+                return LAYER_STYLE_MAP.get(FindLayerStyle(geojson) ?? LayerType.Others);
+            });
             this.dataLayerMap.set(layerGeojson, data);
             console.log(`${geojson} loaded.`);
         });
