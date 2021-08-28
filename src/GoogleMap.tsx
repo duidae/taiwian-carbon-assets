@@ -5,17 +5,9 @@ import GoogleMapReact from "google-map-react";
 import "./GoogleMap.scss";
 
 import {AppStore, LayerGeojson} from "./stores";
+import {FindLayerStyleByName, LayerType} from "./models";
 
 const TAIPEI_CENTER = {lat: 25.026054, lng: 121.543439};
-
-enum LayerType {
-    Border,
-    Building,
-    PublicAsset,
-    GreenFacility,
-    Others
-}
-
 const LAYER_STYLE_MAP = new Map<LayerType, any>([
     [
         LayerType.Border,
@@ -61,19 +53,6 @@ const LAYER_STYLE_MAP = new Map<LayerType, any>([
     ]
 ]);
 
-const FindLayerStyle = (jsonName: string): LayerType => {
-    if (jsonName.includes("界")) {
-        return LayerType.Border;
-    } else if (jsonName.includes("建物")) {
-        return LayerType.Building;
-    } else if (jsonName.includes("公有")) {
-        return LayerType.PublicAsset;
-    } else if (jsonName.includes("光電")) {
-        return LayerType.GreenFacility;
-    }
-    return LayerType.Others;
-};
-
 @observer
 export class GoogleMap extends React.Component<any> {
     private map: any;
@@ -96,7 +75,7 @@ export class GoogleMap extends React.Component<any> {
             const geojson = layerGeojson.replace(/^.*\//, ""); // TODO: delete this when support folder structure
             data.loadGeoJson(geojson);
             data.setStyle((feature: any) => {
-                return LAYER_STYLE_MAP.get(FindLayerStyle(geojson) ?? LayerType.Others);
+                return LAYER_STYLE_MAP.get(FindLayerStyleByName(geojson) ?? LayerType.Others);
             });
             this.dataLayerMap.set(layerGeojson, data);
             console.log(`${geojson} loaded.`);

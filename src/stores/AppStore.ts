@@ -1,5 +1,7 @@
 import {action, computed, makeObservable, observable, ObservableMap} from "mobx";
 
+import {FindLayerStyleByName, LayerType} from "../models";
+
 export type LayerGeojson = string;
 export type LayerSelections = ObservableMap<LayerGeojson, boolean>;
 
@@ -58,12 +60,11 @@ export class AppStore {
         this.isLayerSelected = new ObservableMap<LayerGeojson, boolean>([]);
         this.layerGeojsons?.forEach(layerGeojson => this.isLayerSelected.set(layerGeojson, false));
 
-        // Activate first area
+        // Activate the first area
         const defaultArea = this.analysisAreas?.[0];
         this.selectedArea = defaultArea?.folder;
-        defaultArea?.layerGeojsons?.forEach(layerGeojson => {
-            this.isLayerSelected.set(`${defaultArea.folder}/${layerGeojson}`, true);
-        });
+        const borderLayer = defaultArea?.layerGeojsons?.find(layerGeojson => layerGeojson?.includes("界"));
+        this.isLayerSelected.set(`${defaultArea?.folder}/${borderLayer}`, true);
     }
 
     @action selectAreaLayers = (area: string) => {
@@ -74,7 +75,7 @@ export class AppStore {
                 return `${analysisArea.folder}/${layerGeojson}`;
             });
             this.isLayerSelected?.forEach((isSelected, layerGeojson) => {
-                this.isLayerSelected.set(layerGeojson, layerGeojsonPaths.includes(layerGeojson) ? true : false);
+                this.isLayerSelected.set(layerGeojson, layerGeojsonPaths.includes(layerGeojson) && FindLayerStyleByName(layerGeojson) === LayerType.Border ? true : false);
             });
         }
     };
