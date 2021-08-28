@@ -21,7 +21,7 @@ export class AppStore {
         {
             folder: "臺北市大安區",
             center: {lat: 25.038357847174, lng: 121.54770626982},
-            layerGeojsons: ["大安區-公有資產.json", "大安區-光電設施.json"],
+            layerGeojsons: ["大安區區界.json", "大安區公有土地.json", "大安區建物.json", "大安區-光電設施.json"],
             piChartData: [4344, 5435, 1443, 4443],
             forceChartData: [
                 {name: "光電設施", data: [80, 50, 30, 40, 100, 20]},
