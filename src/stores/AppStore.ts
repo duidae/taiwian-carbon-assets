@@ -32,7 +32,7 @@ export class AppStore {
         {
             folder: "花蓮縣東華鄉",
             center: {lat: 25.023556, lng: 121.488929},
-            layerGeojsons: ["東華-公有資產.json", "東華-光電設施.json"],
+            layerGeojsons: ["東華鄉區界.json", "東華鄉光電設施.json"],
             piChartData: [5435, 4344, 4443, 1443],
             forceChartData: [
                 {name: "光電設施", data: [20, 30, 40, 80, 20, 80]},
