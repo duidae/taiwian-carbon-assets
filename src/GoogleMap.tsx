@@ -6,7 +6,58 @@ import "./GoogleMap.scss";
 
 import {AppStore, LayerGeojson} from "./stores";
 
-const TAIPEI_CENTER = {lat: 25.038357847174, lng: 121.54770626982};
+const TAIPEI_CENTER = {lat: 25.026054, lng: 121.543439};
+
+enum LayerType {
+    Border,
+    Building,
+    PublicAsset,
+    GreenFacility,
+    Others
+}
+
+const LAYER_STYLE_MAP = new Map<LayerType, any>([
+    [LayerType.Border, {
+        strokeColor: "green",
+        strokeWeight: 5,
+        fillOpacity: 0,
+        clickable: false
+    }],
+    [LayerType.Building, {
+        strokeColor: "gray",
+        fillColor: "gray",
+        clickable: false
+    }],
+    [LayerType.PublicAsset, {
+        strokeColor: "darkGoldenRod",
+        fillColor: "darkGoldenRod",
+        clickable: false
+    }],
+    [LayerType.GreenFacility, {
+        strokeColor: "green",
+        fillColor: "green",
+        clickable: false
+    }],
+    [LayerType.Others, {
+        strokeColor: "green",
+        strokeWeight: 5,
+        fillOpacity: 0,
+        clickable: false
+    }]
+]);
+
+const FindLayerStyle = (jsonName: string): LayerType => {
+    if (jsonName.includes("界")) {
+        return LayerType.Border;
+    } else if (jsonName.includes("建物")) {
+        return LayerType.Building;
+    } else if (jsonName.includes("公有")) {
+        return LayerType.PublicAsset;
+    } else if (jsonName.includes("光電")) {
+        return LayerType.GreenFacility;
+    }
+    return LayerType.Others;
+};
 
 @observer
 export class GoogleMap extends React.Component<any> {
@@ -29,14 +80,7 @@ export class GoogleMap extends React.Component<any> {
             let data = new google.maps.Data();
             const geojson = layerGeojson.replace(/^.*\//, ""); // TODO: delete this when support folder structure
             data.loadGeoJson(geojson);
-            data.setStyle((feature: any) => {
-                const color = feature.getProperty("status") === "有效" ? "green" : "gray";
-                return {
-                    fillColor: color,
-                    strokeColor: color,
-                    clickable: true
-                };
-            });
+            data.setStyle((feature: any) => {return LAYER_STYLE_MAP.get(FindLayerStyle(geojson) ?? LayerType.Others)});
             this.dataLayerMap.set(layerGeojson, data);
             console.log(`${geojson} loaded.`);
         });
@@ -62,7 +106,7 @@ export class GoogleMap extends React.Component<any> {
                 <GoogleMapReact
                     bootstrapURLKeys={{key: "YOUR_GOOGLE_APP_KEY"}}
                     defaultCenter={TAIPEI_CENTER}
-                    defaultZoom={12}
+                    defaultZoom={14}
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}
                     onGoogleApiLoaded={({map, maps}) => this.initMap(map, maps)}
