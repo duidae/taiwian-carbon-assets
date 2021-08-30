@@ -33,7 +33,7 @@ export class AppStore {
         },
         {
             folder: "花蓮縣壽豐鄉",
-            center: {lat: 25.023556, lng: 121.488929},
+            center: {lat: 25.0343, lng: 121.516989},
             layerGeojsons: ["壽豐鄉區界.json", "壽豐鄉光電設施.json"],
             piChartData: [5435, 4344, 4443, 1443],
             forceChartData: [
@@ -93,6 +93,10 @@ export class AppStore {
         return dataLayerGeojsonMap;
     }
     */
+
+    @computed get selectedAreaCenter(): {lat: number, lng: number} | undefined {
+        return this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea)?.center;
+    }
 
     @computed get selectedPiChartData(): number[] | undefined {
         return this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea)?.piChartData;

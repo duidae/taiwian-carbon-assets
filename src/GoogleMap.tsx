@@ -7,7 +7,6 @@ import "./GoogleMap.scss";
 import {AppStore, LayerGeojson} from "./stores";
 import {FindLayerStyleByName, LayerType} from "./models";
 
-const TAIPEI_CENTER = {lat: 25.026054, lng: 121.543439};
 const LAYER_STYLE_MAP = new Map<LayerType, any>([
     [
         LayerType.Border,
@@ -64,6 +63,10 @@ export class GoogleMap extends React.Component<any> {
         this.dataLayerMap = new Map<LayerGeojson, google.maps.Data>([]);
 
         autorun(() => {
+            this.moveCenterTo(AppStore.Instance.selectedAreaCenter);
+        });
+
+        autorun(() => {
             this.showSelectedLayers(AppStore.Instance.selectedLayers);
         });
     }
@@ -88,6 +91,12 @@ export class GoogleMap extends React.Component<any> {
         this.showSelectedLayers(AppStore.Instance.selectedLayers);
     };
 
+    private moveCenterTo = (center: {lat: number, lng: number} | undefined) => {
+        if (this.map && center) {
+            this.map.panTo(center);
+        }
+    };
+
     private showSelectedLayers = (selectedLayers: any) => {
         if (this.map) {
             AppStore.Instance.isLayerSelected?.forEach((isSelected, layerGeojson) => {
@@ -101,7 +110,7 @@ export class GoogleMap extends React.Component<any> {
             <div className="map">
                 <GoogleMapReact
                     bootstrapURLKeys={{key: "YOUR_GOOGLE_APP_KEY"}}
-                    defaultCenter={TAIPEI_CENTER}
+                    defaultCenter={AppStore.Instance.selectedAreaCenter}
                     defaultZoom={14}
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}
