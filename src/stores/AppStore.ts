@@ -94,7 +94,7 @@ export class AppStore {
     }
     */
 
-    @computed get selectedAreaCenter(): {lat: number, lng: number} | undefined {
+    @computed get selectedAreaCenter(): {lat: number; lng: number} | undefined {
         return this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea)?.center;
     }
 
