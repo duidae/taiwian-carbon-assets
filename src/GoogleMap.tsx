@@ -5,7 +5,7 @@ import GoogleMapReact from "google-map-react";
 import "./GoogleMap.scss";
 
 import {AppStore, LayerGeojson} from "./stores";
-import {FindLayerStyleByName, LayerType} from "./models";
+import {FindLayerStyleByName, LayerType, TAIPEI_CENTER} from "./models";
 
 const LAYER_STYLE_MAP = new Map<LayerType, any>([
     [
@@ -110,7 +110,7 @@ export class GoogleMap extends React.Component<any> {
             <div className="map">
                 <GoogleMapReact
                     bootstrapURLKeys={{key: "YOUR_GOOGLE_APP_KEY"}}
-                    defaultCenter={AppStore.Instance.selectedAreaCenter}
+                    defaultCenter={AppStore.Instance.selectedAreaCenter ?? TAIPEI_CENTER}
                     defaultZoom={14}
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}

@@ -1,4 +1,4 @@
-const TAIPEI_CENTER = {lat: 25.026054, lng: 121.543439};
+export const TAIPEI_CENTER = {lat: 25.026054, lng: 121.543439};
 
 export enum LayerType {
     Border,
