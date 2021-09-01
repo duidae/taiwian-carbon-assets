@@ -31,6 +31,8 @@
         "apply-google-key": "./apply-google-key.sh",
         "start": "yarn run apply-google-key; react-scripts start",
         "build": "yarn run apply-google-key; react-scripts build",
+        "profile": "yarn run apply-google-key; react-scripts build -- --profile",
+        "production": "serve -s build -p 3000",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "format": "yarn prettier --write ./src"
