@@ -2,10 +2,9 @@ import * as React from "react";
 import {observer} from "mobx-react";
 import {action, makeObservable, observable, ObservableMap} from "mobx";
 import clsx from "clsx";
-import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, ListSubheader, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Collapse, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction, ListSubheader, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {createTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
 import {blue} from "@material-ui/core/colors";
-import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
@@ -184,10 +183,6 @@ class DashboardLayout extends React.Component<any, any> {
                     <Typography variant="h5" noWrap>
                         {`碳匯城鄉 - 公有資產減碳評估儀表板${AppStore.Instance.selectedArea ? `： [ ${AppStore.Instance.selectedArea} ]` : ""}`}
                     </Typography>
-                    {/*
-                    <SearchIcon />
-                    <InputBase placeholder="搜尋地號…" inputProps={{"aria-label": "search"}} />
-                    */}
                 </Toolbar>
             </AppBar>
         );
