@@ -63,7 +63,7 @@ export class GoogleMap extends React.Component<any> {
         this.dataLayerMap = new Map<LayerGeojson, google.maps.Data>([]);
 
         autorun(() => {
-            this.moveCenterTo(AppStore.Instance.selectedAreaCenter);
+            this.moveCenterTo(AppStore.Instance.selectedAreaCenterAndZoom);
         });
 
         autorun(() => {
@@ -91,9 +91,10 @@ export class GoogleMap extends React.Component<any> {
         this.showSelectedLayers(AppStore.Instance.selectedLayers);
     };
 
-    private moveCenterTo = (center: {lat: number; lng: number} | undefined) => {
-        if (this.map && center) {
-            this.map.panTo(center);
+    private moveCenterTo = (centerAndZoom: {center: {lat: number; lng: number} | undefined, zoom: number | undefined}) => {
+        if (this.map && centerAndZoom?.center && centerAndZoom?.zoom) {
+            this.map.setZoom(centerAndZoom.zoom);
+            this.map.panTo(centerAndZoom.center);
         }
     };
 
@@ -110,7 +111,7 @@ export class GoogleMap extends React.Component<any> {
             <div className="map">
                 <GoogleMapReact
                     bootstrapURLKeys={{key: "YOUR_GOOGLE_APP_KEY"}}
-                    defaultCenter={AppStore.Instance.selectedAreaCenter ?? TAIPEI_CENTER}
+                    defaultCenter={AppStore.Instance.selectedAreaCenterAndZoom?.center ?? TAIPEI_CENTER}
                     defaultZoom={14}
                     options={{streetViewControl: true, mapTypeControl: true}}
                     yesIWantToUseGoogleMapApiInternals={true}
