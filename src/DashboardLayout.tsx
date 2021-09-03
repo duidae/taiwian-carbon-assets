@@ -16,7 +16,7 @@ import EmojiNatureIcon from "@material-ui/icons/EmojiNature";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
-import {DashboardContentComponent} from "./pages/DashboardContent";
+import {DashboardContentComponent} from "./components";
 import {AppStore} from "./stores";
 
 const DRAWER_WIDTH = 250;
