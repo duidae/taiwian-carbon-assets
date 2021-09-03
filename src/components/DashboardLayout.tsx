@@ -16,8 +16,8 @@ import EmojiNatureIcon from "@material-ui/icons/EmojiNature";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
-import {DashboardContentComponent} from "./components";
-import {AppStore} from "./stores";
+import {DashboardContentComponent} from "components";
+import {AppStore} from "stores";
 
 const DRAWER_WIDTH = 250;
 const styles = theme => ({
@@ -284,4 +284,4 @@ class DashboardLayout extends React.Component<any, any> {
     }
 }
 
-export default withStyles(styles as {})(DashboardLayout);
+export const DashboardLayoutComponent = withStyles(styles as {})(DashboardLayout);

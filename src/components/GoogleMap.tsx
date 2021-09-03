@@ -4,8 +4,8 @@ import {observer} from "mobx-react";
 import GoogleMapReact from "google-map-react";
 import "./GoogleMap.scss";
 
-import {AppStore, LayerGeojson} from "./stores";
-import {FindLayerStyleByName, LayerType, TAIPEI_CENTER} from "./models";
+import {AppStore, LayerGeojson} from "stores";
+import {FindLayerStyleByName, LayerType, TAIPEI_CENTER} from "models";
 
 const LAYER_STYLE_MAP = new Map<LayerType, any>([
     [

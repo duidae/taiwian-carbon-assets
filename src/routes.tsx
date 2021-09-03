@@ -1,6 +1,6 @@
 import {useRoutes} from "react-router-dom";
-import DashboardLayout from "./DashboardLayout";
+import {DashboardLayoutComponent} from "./components";
 
 export const Router = () => {
-    return useRoutes([{path: "/", element: <DashboardLayout />}]);
+    return useRoutes([{path: "/", element: <DashboardLayoutComponent />}]);
 };

@@ -1,9 +1,8 @@
 import {Grid, Container} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 
-import {GoogleMap} from "../GoogleMap";
-import {ForceChartComponent, PiChartComponent} from "../components";
-import {AppStore} from "../stores";
+import {GoogleMap, ForceChartComponent, PiChartComponent} from ".";
+import {AppStore} from "stores";
 
 const styles = theme => ({
     root: {
