@@ -91,7 +91,7 @@ export class GoogleMap extends React.Component<any> {
         this.showSelectedLayers(AppStore.Instance.selectedLayers);
     };
 
-    private moveCenterTo = (centerAndZoom: {center: {lat: number; lng: number} | undefined, zoom: number | undefined}) => {
+    private moveCenterTo = (centerAndZoom: {center: {lat: number; lng: number} | undefined; zoom: number | undefined}) => {
         if (this.map && centerAndZoom?.center && centerAndZoom?.zoom) {
             this.map.setZoom(centerAndZoom.zoom);
             this.map.panTo(centerAndZoom.center);

@@ -96,7 +96,7 @@ export class AppStore {
     }
     */
 
-    @computed get selectedAreaCenterAndZoom(): {center: {lat: number; lng: number} | undefined, zoom: number | undefined} {
+    @computed get selectedAreaCenterAndZoom(): {center: {lat: number; lng: number} | undefined; zoom: number | undefined} {
         const area = this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea);
         return {center: area?.center, zoom: area?.zoom};
     }
