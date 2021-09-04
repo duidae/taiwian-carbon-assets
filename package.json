@@ -58,6 +58,7 @@
     "devDependencies": {
         "@types/google-map-react": "^2.1.2",
         "@types/google.maps": "^3.45.6",
-        "prettier": "2.3.2"
+        "prettier": "2.3.2",
+        "stats-js": "^1.0.1"
     }
 }
