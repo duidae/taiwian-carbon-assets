@@ -32,6 +32,7 @@
         "start": "yarn run apply-google-key; react-scripts start",
         "build": "yarn run apply-google-key; react-scripts build",
         "profile": "yarn run apply-google-key; react-scripts build -- --profile",
+        "why": "REACT_APP_ENVIRONMENT='why_did_you_render' yarn start",
         "production": "serve -s build -p 3000",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
@@ -58,6 +59,7 @@
     "devDependencies": {
         "@types/google-map-react": "^2.1.2",
         "@types/google.maps": "^3.45.6",
+        "@welldone-software/why-did-you-render": "^6.2.1",
         "prettier": "2.3.2",
         "stats-js": "^1.0.1"
     }
