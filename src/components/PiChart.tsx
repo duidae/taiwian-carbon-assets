@@ -18,7 +18,7 @@ function PiChart(props) {
     const theme = useTheme();
     const chartOptions = merge(BaseOptionChart(), {
         colors: [theme.palette.primary.main, theme.palette.info.main, theme.palette.warning.main, theme.palette.error.main],
-        labels: ["閒置空地", "建築物", "溼地", "林地"],
+        labels: props.data.labels,
         stroke: {colors: [theme.palette.background.paper]},
         legend: {floating: false, horizontalAlign: "center"},
         dataLabels: {enabled: true, dropShadow: {enabled: false}},
@@ -40,7 +40,7 @@ function PiChart(props) {
         <Card className={classes.root}>
             <CardHeader title="公有資產盤點" />
             <div className={classes.chart}>
-                <ReactApexChart className={classes.chart} type="pie" series={props.data} options={chartOptions} height={"95%"} />
+                <ReactApexChart className={classes.chart} type="pie" series={props.data.data} options={chartOptions} height={"95%"} />
             </div>
         </Card>
     );

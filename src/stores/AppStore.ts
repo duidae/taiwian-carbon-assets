@@ -25,7 +25,10 @@ export class AppStore {
             center: {lat: 25.026054, lng: 121.543439},
             zoom: 14,
             layerGeojsons: ["大安區區界.json", "大安區公有土地.json", "大安區建物.json", "大安區光電設施.json"],
-            piChartData: [4344, 5435, 1443, 4443],
+            piChartData: {
+                labels: ["公有建築", "閒置空地", "公園"],
+                data: [4344, 5435, 1443]
+            },
             forceChartData: [
                 {name: "光電設施", data: [80, 50, 30, 40, 100, 20]},
                 {name: "探捕捉設施", data: [20, 30, 40, 80, 20, 80]},
@@ -37,7 +40,10 @@ export class AppStore {
             center: {lat: 23.85455775947227, lng: 121.53748791035855},
             zoom: 12,
             layerGeojsons: ["壽豐鄉區界.json", "壽豐鄉光電設施.json"],
-            piChartData: [5435, 4344, 4443, 1443],
+            piChartData: {
+                labels: ["水圳", "埤塘", "林地"],
+                data: [4344, 5435, 1443]
+            },
             forceChartData: [
                 {name: "光電設施", data: [20, 30, 40, 80, 20, 80]},
                 {name: "探捕捉設施", data: [80, 50, 30, 40, 100, 20]},
@@ -101,7 +107,7 @@ export class AppStore {
         return {center: area?.center, zoom: area?.zoom};
     }
 
-    @computed get selectedPiChartData(): number[] | undefined {
+    @computed get selectedPiChartData(): {labels: string[]; data: number[]} | undefined {
         return this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea)?.piChartData;
     }
 

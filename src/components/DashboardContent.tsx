@@ -1,7 +1,7 @@
 import {Grid, Container} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 
-import {GoogleMap, ForceChartComponent, PiChartComponent} from ".";
+import {CarbonSinkEstimation, GoogleMap, PiChartComponent} from ".";
 import {AppStore} from "stores";
 
 const styles = theme => ({
@@ -31,10 +31,10 @@ function DashboardContent(props) {
                 </Grid>
                 <Grid item xs={4} className={classes.chartContainer}>
                     <Grid item className={classes.chart}>
-                        <PiChartComponent data={AppStore.Instance.selectedPiChartData} />
+                        <CarbonSinkEstimation />
                     </Grid>
                     <Grid item className={classes.chart}>
-                        <ForceChartComponent data={AppStore.Instance.selectedForceChartData} />
+                        <PiChartComponent data={AppStore.Instance.selectedPiChartData} />
                     </Grid>
                 </Grid>
             </Grid>

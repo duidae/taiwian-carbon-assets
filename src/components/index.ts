@@ -1,3 +1,4 @@
+export * from "./CarbonSinkEstimation";
 export * from "./DashboardContent";
 export * from "./DashboardLayout";
 export * from "./ForceChart";
