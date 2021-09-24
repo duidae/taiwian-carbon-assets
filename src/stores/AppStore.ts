@@ -107,6 +107,10 @@ export class AppStore {
         return {center: area?.center, zoom: area?.zoom};
     }
 
+    @computed get selectedAreaSolarPanelArea(): number {
+        return 10000;
+    }
+
     @computed get selectedPiChartData(): {labels: string[]; data: number[]} | undefined {
         return this.analysisAreas.find(analysisArea => analysisArea.folder === this.selectedArea)?.piChartData;
     }

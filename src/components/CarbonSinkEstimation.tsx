@@ -1,6 +1,10 @@
 import {withStyles} from "@material-ui/core/styles";
 import {Card, CardHeader, Slider} from "@material-ui/core";
 
+import {AppStore} from "stores";
+
+const CO2_EQ = 50.9; // 1 m^2 solar panel can reduce 50.9 kg equivalent weight of CO2 (Taipei area)
+
 const styles = theme => ({
     root: {
         height: "100%"
@@ -25,14 +29,20 @@ function CarbonSink(props) {
         }
     ];
 
-    function percentageText(value) {
+    const percentageText = value => {
         return `${value}%`;
-    }
+    };
+
+    const carbonSinkValue = percentage => {
+        return AppStore.Instance.selectedAreaSolarPanelArea * percentage * CO2_EQ;
+    };
 
     return (
         <Card className={classes.root}>
             <CardHeader title="碳匯估算" />
             <Slider aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={10} valueLabelDisplay="on" marks={percentages} />
+            <p>預估每年效益</p>
+            {`約可減下${carbonSinkValue(50)}公斤CO2當量`}
         </Card>
     );
 }
