@@ -8,6 +8,9 @@ const CO2_EQ = 50.9; // 1 m^2 solar panel can reduce 50.9 kg equivalent weight o
 const styles = theme => ({
     root: {
         height: "100%"
+    },
+    slider: {
+        padding: "5px",
     }
 });
 
@@ -52,7 +55,9 @@ function CarbonSink(props) {
     return (
         <Card className={classes.root}>
             <CardHeader title="碳匯估算" />
-            <Slider aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={10} valueLabelDisplay="on" marks={percentages} />
+            <div className={classes.slider}>
+            <Slider className={classes.slider} aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
+            </div>
             <p>預估每年效益</p>
             {`約可減下${carbonSinkValue(0.5)}公斤CO2當量`}
             {"計算公式"}
