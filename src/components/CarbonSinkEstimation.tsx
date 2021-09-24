@@ -54,7 +54,7 @@ function CarbonSink(props) {
             <CardHeader title="碳匯估算" />
             <Slider aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={10} valueLabelDisplay="on" marks={percentages} />
             <p>預估每年效益</p>
-            {`約可減下${carbonSinkValue(50)}公斤CO2當量`}
+            {`約可減下${carbonSinkValue(0.5)}公斤CO2當量`}
             {"計算公式"}
         </Card>
     );
