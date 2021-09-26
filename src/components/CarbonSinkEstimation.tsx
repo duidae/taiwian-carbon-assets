@@ -11,6 +11,9 @@ const styles = theme => ({
     },
     slider: {
         padding: "5px",
+    },
+    formula: {
+        textDecoration: "underline dashed"
     }
 });
 
@@ -42,7 +45,7 @@ function CarbonSink(props) {
 
     const formulaDescription = (
         <p>
-            台北市10平方公尺（約3坪）的屋頂可利用面積
+            台北市10平方公尺(約3坪)的屋頂可利用面積
             <br />
             ＝1kWp的裝置容量
             <br />
@@ -62,9 +65,9 @@ function CarbonSink(props) {
             <Typography variant="h4" noWrap>
                 <b>{`${carbonSinkValue(0.5)} 公噸`}</b>
             </Typography>
-            <p>CO2當量<br/></p>
-            <Tooltip title="Delete">
-                <p>計算公式</p>
+            <p>CO<sub>2</sub>當量<br/></p>
+            <Tooltip title={formulaDescription}>
+                <p className={classes.formula}>計算公式</p>
             </Tooltip>
         </Card>
     );
