@@ -1,5 +1,5 @@
 import {withStyles} from "@material-ui/core/styles";
-import {Card, CardHeader, Slider} from "@material-ui/core";
+import {Card, CardHeader, Slider, Tooltip, Typography} from "@material-ui/core";
 
 import {AppStore} from "stores";
 
@@ -56,11 +56,16 @@ function CarbonSink(props) {
         <Card className={classes.root}>
             <CardHeader title="碳匯估算" />
             <div className={classes.slider}>
-            <Slider className={classes.slider} aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
+                <Slider className={classes.slider} aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
             </div>
-            <p>預估每年效益</p>
-            {`約可減下${carbonSinkValue(0.5)}公斤CO2當量`}
-            {"計算公式"}
+            <p>預估每年效益可減下<br/></p>
+            <Typography variant="h4" noWrap>
+                <b>{`${carbonSinkValue(0.5)} 公噸`}</b>
+            </Typography>
+            <p>CO2當量<br/></p>
+            <Tooltip title="Delete">
+                <p>計算公式</p>
+            </Tooltip>
         </Card>
     );
 }
