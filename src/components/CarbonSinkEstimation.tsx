@@ -58,6 +58,13 @@ function CarbonSink(props) {
     return (
         <Card className={classes.root}>
             <CardHeader title="碳匯估算" />
+            <p>公有建築頂層面積約<br/></p>
+            <Typography variant="h4" noWrap>
+                <b>{AppStore.Instance.selectedAreaSolarPanelArea} 平方公尺</b>
+            </Typography>
+            <Typography variant="h6" noWrap>
+                <b>光電板覆蓋率</b>
+            </Typography>
             <div className={classes.slider}>
                 <Slider className={classes.slider} aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
             </div>
