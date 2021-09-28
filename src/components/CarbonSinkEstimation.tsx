@@ -66,7 +66,7 @@ function CarbonSink(props) {
                 <b>光電板覆蓋率</b>
             </Typography>
             <div className={classes.slider}>
-                <Slider className={classes.slider} aria-label="Custom marks" defaultValue={50} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
+                <Slider className={classes.slider} aria-label="Custom marks" defaultValue={45} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
             </div>
             <p>預估每年效益可減下<br/></p>
             <Typography variant="h4" noWrap>
