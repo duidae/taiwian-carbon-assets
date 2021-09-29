@@ -3,7 +3,8 @@ import {Card, CardHeader, Slider, Tooltip, Typography} from "@material-ui/core";
 
 import {AppStore} from "stores";
 
-const CO2_EQ = 50.9; // 1 m^2 solar panel can reduce 50.9 kg equivalent weight of CO2 (Taipei area)
+// 1 m^2 solar panel can reduce 0.0509 mt (50.9 kg) equivalent weight of CO2 (Taipei area)
+const CO2_EQ = 0.0509; 
 
 const styles = theme => ({
     root: {
