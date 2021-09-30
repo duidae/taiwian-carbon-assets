@@ -108,7 +108,7 @@ export class AppStore {
     }
 
     @computed get selectedAreaSolarPanelArea(): number {
-        return 10000;
+        return 860769;
     }
 
     @computed get selectedPiChartData(): {labels: string[]; data: number[]} | undefined {
