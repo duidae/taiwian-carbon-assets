@@ -41,7 +41,7 @@ function CarbonSink(props) {
     };
 
     const carbonSinkValue = percentage => {
-        return AppStore.Instance.selectedAreaSolarPanelArea * percentage * CO2_EQ;
+        return Math.floor(AppStore.Instance.selectedAreaSolarPanelArea * percentage * CO2_EQ)?.toLocaleString();
     };
 
     const formulaDescription = (
@@ -59,9 +59,9 @@ function CarbonSink(props) {
     return (
         <Card className={classes.root}>
             <CardHeader title="碳匯估算" />
-            <p>公有建築頂層面積約<br/></p>
-            <Typography variant="h4" noWrap>
-                <b>{AppStore.Instance.selectedAreaSolarPanelArea} 平方公尺</b>
+            <Typography variant="h5" noWrap>
+                公有建築頂層面積約：
+                <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} m<sup>2</sup></b>
             </Typography>
             <Typography variant="h6" noWrap>
                 <b>光電板覆蓋率</b>
@@ -71,9 +71,10 @@ function CarbonSink(props) {
             </div>
             <p>預估每年效益可減下<br/></p>
             <Typography variant="h4" noWrap>
-                <b>{`${carbonSinkValue(0.5)} 公噸`}</b>
+                <b>{`${carbonSinkValue(AppStore.Instance.solarCoverRatio)} 公噸 `}</b>
+                CO<sub>2</sub>當量
             </Typography>
-            <p>CO<sub>2</sub>當量<br/></p>
+            
             <Tooltip title={formulaDescription}>
                 <p className={classes.formula}>計算公式</p>
             </Tooltip>
