@@ -18,6 +18,7 @@ export class AppStore {
     @observable selectedArea: string | undefined;
     @observable layerGeojsons: LayerGeojson[];
     @observable isLayerSelected: ObservableMap<LayerGeojson, boolean>;
+    @observable solarCoverRatio: number;
 
     public analysisAreas = [
         {
@@ -73,6 +74,7 @@ export class AppStore {
         this.selectedArea = defaultArea?.folder;
         const borderLayer = defaultArea?.layerGeojsons?.find(layerGeojson => layerGeojson?.includes("界"));
         this.isLayerSelected.set(`${defaultArea?.folder}/${borderLayer}`, true);
+        this.solarCoverRatio = 0.45;
     }
 
     @action selectAreaLayers = (area: string) => {
@@ -92,6 +94,10 @@ export class AppStore {
         if (this.layerGeojsons?.includes(selectedLayer)) {
             this.isLayerSelected.set(selectedLayer, !this.isLayerSelected.get(selectedLayer));
         }
+    };
+
+    @action setSolarCoverRatio = (ratio: number) => {
+        this.solarCoverRatio = ratio;
     };
 
     /* why this is not working?

@@ -60,21 +60,23 @@ function CarbonSink(props) {
         <Card className={classes.root}>
             <CardHeader title="碳匯估算" />
             <Typography variant="h5" noWrap>
-                公有建築頂層面積約：
-                <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} m<sup>2</sup></b>
+                公有建築頂層面積約
+                <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} </b>
+                m<sup>2</sup>
             </Typography>
             <Typography variant="h6" noWrap>
-                <b>光電板覆蓋率</b>
+                光電板覆蓋率
             </Typography>
             <div className={classes.slider}>
                 <Slider className={classes.slider} aria-label="Custom marks" defaultValue={45} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
             </div>
-            <p>預估每年效益可減下<br/></p>
-            <Typography variant="h4" noWrap>
+            <Typography variant="h5" noWrap>
+                預估每年效益可減下
+            </Typography>
+            <Typography variant="h5" noWrap>
                 <b>{`${carbonSinkValue(AppStore.Instance.solarCoverRatio)} 公噸 `}</b>
                 CO<sub>2</sub>當量
             </Typography>
-            
             <Tooltip title={formulaDescription}>
                 <p className={classes.formula}>計算公式</p>
             </Tooltip>
