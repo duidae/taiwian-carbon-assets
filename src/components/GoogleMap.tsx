@@ -91,18 +91,18 @@ export class GoogleMap extends React.Component<any> {
             if (layerType === LayerType.GreenFacility) {
                 data.addListener("click", (event: any) => {
                     const content = `${event.feature.getProperty("類別")}<br>${event.feature.getProperty("名稱")}<br>裝置容量: ${event.feature.getProperty("裝置容量-瓩")} 瓩`;
-                    console.log(content);
                     const clickInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
                     clickInfoWindow.open({map: map, shouldFocus: false});
                 });
-                /*
                 // TODO: Hover event
-                let mouseoverInfoWindow= new google.maps.InfoWindow();
+                /*
+                // let mouseoverInfoWindow = new google.maps.InfoWindow();
+                let mouseoverInfoWindow: any;
                 data.addListener("mouseover", (event: any) => {
                     const content = `${event.feature.getProperty("類別")}<br>${event.feature.getProperty("名稱")}<br>裝置容量: ${event.feature.getProperty("裝置容量-瓩")} 瓩`;
-                    mouseoverInfoWindow.setContent(content);
-                    mouseoverInfoWindow.setPosition(event.latLng);
-                    //mouseoverInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
+                    // mouseoverInfoWindow.setContent(content);
+                    // mouseoverInfoWindow.setPosition(event.latLng);
+                    mouseoverInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
                     mouseoverInfoWindow.open({map: map, shouldFocus: false});
                 });
                 data.addListener("mouseout", (event: any) => {
