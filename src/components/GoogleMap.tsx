@@ -26,6 +26,14 @@ const LAYER_STYLE_MAP = new Map<LayerType, any>([
         }
     ],
     [
+        LayerType.PublicBuilding,
+        {
+            strokeColor: "gray",
+            fillColor: "gray",
+            clickable: false
+        }
+    ],
+    [
         LayerType.PublicAsset,
         {
             strokeColor: "darkGoldenRod",
@@ -38,7 +46,6 @@ const LAYER_STYLE_MAP = new Map<LayerType, any>([
         {
             strokeColor: "green",
             fillColor: "green",
-            clickable: false
         }
     ],
     [
@@ -71,15 +78,38 @@ export class GoogleMap extends React.Component<any> {
         });
     }
 
-    private loadGeojsons = () => {
+    private loadGeojsons = (map: any) => {
         this.dataLayerMap.clear();
         AppStore.Instance.layerGeojsons?.forEach(layerGeojson => {
             let data = new google.maps.Data();
             const geojson = layerGeojson.replace(/^.*\//, ""); // TODO: delete this when support folder structure
             data.loadGeoJson(geojson);
+            const layerType = FindLayerStyleByName(geojson);
             data.setStyle((feature: any) => {
-                return LAYER_STYLE_MAP.get(FindLayerStyleByName(geojson) ?? LayerType.Others);
+                return LAYER_STYLE_MAP.get(layerType ?? LayerType.Others);
             });
+            if (layerType === LayerType.GreenFacility) {
+                data.addListener("click", (event: any) => {
+                    const content = `${event.feature.getProperty("類別")}<br>${event.feature.getProperty("名稱")}<br>裝置容量: ${event.feature.getProperty("裝置容量-瓩")} 瓩`;
+                    console.log(content);
+                    const clickInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
+                    clickInfoWindow.open({map: map, shouldFocus: false});
+                });
+                /*
+                // TODO: Hover event
+                let mouseoverInfoWindow= new google.maps.InfoWindow();
+                data.addListener("mouseover", (event: any) => {
+                    const content = `${event.feature.getProperty("類別")}<br>${event.feature.getProperty("名稱")}<br>裝置容量: ${event.feature.getProperty("裝置容量-瓩")} 瓩`;
+                    mouseoverInfoWindow.setContent(content);
+                    mouseoverInfoWindow.setPosition(event.latLng);
+                    //mouseoverInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
+                    mouseoverInfoWindow.open({map: map, shouldFocus: false});
+                });
+                data.addListener("mouseout", (event: any) => {
+                    mouseoverInfoWindow?.close();
+                });
+                */
+            }
             this.dataLayerMap.set(layerGeojson, data);
             console.log(`${geojson} loaded.`);
         });
@@ -87,7 +117,7 @@ export class GoogleMap extends React.Component<any> {
 
     private initMap = (map: any, maps: any) => {
         this.map = map;
-        this.loadGeojsons();
+        this.loadGeojsons(map);
         this.showSelectedLayers(AppStore.Instance.selectedLayers);
     };
 
