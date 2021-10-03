@@ -27,8 +27,8 @@ export class AppStore {
             zoom: 14,
             layerGeojsons: ["大安區區界.json", "大安區公有建物.json", "大安區既有再生能源.json", "大安區公有土地.json", "大安區建物.json"],
             piChartData: {
-                labels: ["公有建築", "閒置空地", "公園"],
-                data: [4344, 5435, 1443]
+                labels: ["公有建築", "開放空間", "公園與綠資源"],
+                data: [6844, 3235, 1443]
             },
             forceChartData: [
                 {name: "光電設施", data: [80, 50, 30, 40, 100, 20]},
