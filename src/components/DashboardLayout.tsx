@@ -252,6 +252,7 @@ class DashboardLayout extends React.Component<any, any> {
                     ))}
                 </List>
                 <Divider />
+                {/*
                 <List
                     subheader={
                         <ListSubheader color="primary" className={classes.listHeader}>
@@ -266,6 +267,7 @@ class DashboardLayout extends React.Component<any, any> {
                         </ListItem>
                     ))}
                 </List>
+                */}
             </Drawer>
         );
 
