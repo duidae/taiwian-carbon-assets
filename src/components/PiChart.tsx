@@ -37,7 +37,7 @@ function PiChart(props) {
     });
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} variant="outlined">
             <CardHeader title="公有資產盤點" />
             <div className={classes.chart}>
                 <ReactApexChart className={classes.chart} type="pie" series={props.data.data} options={chartOptions} height={"95%"} />

@@ -64,23 +64,26 @@ class CarbonSink extends React.Component<any, any> {
     public render() {
         const classes = this.props.classes;
         return (
-            <Card className={classes.root}>
+            <Card className={classes.root} variant="outlined">
                 <CardHeader title="碳匯估算" />
                 <Typography variant="h5" noWrap>
                     公有建築頂層面積約
                     <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} </b>
                     m<sup>2</sup>
                 </Typography>
+                <br/><br/>
                 <Typography variant="h6" noWrap>
-                    光電板覆蓋率
+                    太陽能板覆蓋率
                 </Typography>
                 <div className={classes.slider}>
                     <Slider className={classes.slider} aria-label="Custom marks" defaultValue={45} getAriaValueText={this.percentageText} step={1} valueLabelDisplay="on" marks={this.percentages} onChange={this.handlSliderChange} />
                 </div>
+                <br/><br/>
                 <Typography variant="h5" noWrap>
                     預估每年效益可減下
                 </Typography>
-                <Typography variant="h5" noWrap>
+                <br/>
+                <Typography variant="h3" noWrap>
                     <b>{`${this.carbonSinkValue(AppStore.Instance.solarCoverRatio)} 公噸 `}</b>
                     CO<sub>2</sub>當量
                 </Typography>
