@@ -97,7 +97,7 @@ export class AppStore {
     };
 
     @action setSolarCoverRatio = (ratio: number) => {
-        this.solarCoverRatio = ratio;
+        this.solarCoverRatio = ratio / 100;
     };
 
     /* why this is not working?

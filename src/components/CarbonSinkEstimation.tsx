@@ -1,3 +1,5 @@
+import * as React from "react";
+import {observer} from "mobx-react";
 import {withStyles} from "@material-ui/core/styles";
 import {Card, CardHeader, Slider, Tooltip, Typography} from "@material-ui/core";
 
@@ -18,10 +20,9 @@ const styles = theme => ({
     }
 });
 
-function CarbonSink(props) {
-    const classes = props.classes;
-
-    const percentages = [
+@observer
+class CarbonSink extends React.Component<any, any> {
+    private percentages = [
         {
             value: 50,
             label: "50%"
@@ -36,15 +37,15 @@ function CarbonSink(props) {
         }
     ];
 
-    const percentageText = value => {
+    private percentageText = value => {
         return `${value}%`;
     };
 
-    const carbonSinkValue = percentage => {
+    private carbonSinkValue = percentage => {
         return Math.floor(AppStore.Instance.selectedAreaSolarPanelArea * percentage * CO2_EQ)?.toLocaleString();
     };
 
-    const formulaDescription = (
+    private formulaDescription = (
         <p>
             台北市10平方公尺(約3坪)的屋頂可利用面積
             <br />
@@ -56,32 +57,39 @@ function CarbonSink(props) {
         </p>
     );
 
-    return (
-        <Card className={classes.root}>
-            <CardHeader title="碳匯估算" />
-            <Typography variant="h5" noWrap>
-                公有建築頂層面積約
-                <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} </b>
-                m<sup>2</sup>
-            </Typography>
-            <Typography variant="h6" noWrap>
-                光電板覆蓋率
-            </Typography>
-            <div className={classes.slider}>
-                <Slider className={classes.slider} aria-label="Custom marks" defaultValue={45} getAriaValueText={percentageText} step={1} valueLabelDisplay="on" marks={percentages} />
-            </div>
-            <Typography variant="h5" noWrap>
-                預估每年效益可減下
-            </Typography>
-            <Typography variant="h5" noWrap>
-                <b>{`${carbonSinkValue(AppStore.Instance.solarCoverRatio)} 公噸 `}</b>
-                CO<sub>2</sub>當量
-            </Typography>
-            <Tooltip title={formulaDescription}>
-                <p className={classes.formula}>計算公式</p>
-            </Tooltip>
-        </Card>
-    );
+    private handlSliderChange = (ev, newValue) => {
+        AppStore.Instance.setSolarCoverRatio(newValue);
+    };
+
+    public render() {
+        const classes = this.props.classes;
+        return (
+            <Card className={classes.root}>
+                <CardHeader title="碳匯估算" />
+                <Typography variant="h5" noWrap>
+                    公有建築頂層面積約
+                    <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} </b>
+                    m<sup>2</sup>
+                </Typography>
+                <Typography variant="h6" noWrap>
+                    光電板覆蓋率
+                </Typography>
+                <div className={classes.slider}>
+                    <Slider className={classes.slider} aria-label="Custom marks" defaultValue={45} getAriaValueText={this.percentageText} step={1} valueLabelDisplay="on" marks={this.percentages} onChange={this.handlSliderChange} />
+                </div>
+                <Typography variant="h5" noWrap>
+                    預估每年效益可減下
+                </Typography>
+                <Typography variant="h5" noWrap>
+                    <b>{`${this.carbonSinkValue(AppStore.Instance.solarCoverRatio)} 公噸 `}</b>
+                    CO<sub>2</sub>當量
+                </Typography>
+                <Tooltip title={this.formulaDescription}>
+                    <p className={classes.formula}>計算公式</p>
+                </Tooltip>
+            </Card>
+        );
+    }
 }
 
 export const CarbonSinkEstimation = withStyles(styles as {})(CarbonSink);
