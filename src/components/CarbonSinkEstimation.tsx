@@ -6,14 +6,14 @@ import {Card, CardHeader, Slider, Tooltip, Typography} from "@material-ui/core";
 import {AppStore} from "stores";
 
 // 1 m^2 solar panel can reduce 0.0509 mt (50.9 kg) equivalent weight of CO2 (Taipei area)
-const CO2_EQ = 0.0509; 
+const CO2_EQ = 0.0509;
 
 const styles = theme => ({
     root: {
         height: "100%"
     },
-    slider: {
-        padding: "5px",
+    sliderContainer: {
+        margin: "20px"
     },
     formula: {
         textDecoration: "underline dashed"
@@ -24,12 +24,24 @@ const styles = theme => ({
 class CarbonSink extends React.Component<any, any> {
     private percentages = [
         {
+            value: 100,
+            label: "100%"
+        },
+        {
             value: 50,
             label: "50%"
         },
         {
-            value: 25,
-            label: "25%"
+            value: 40,
+            label: "40%"
+        },
+        {
+            value: 30,
+            label: "30%"
+        },
+        {
+            value: 20,
+            label: "20%"
         },
         {
             value: 10,
@@ -68,24 +80,22 @@ class CarbonSink extends React.Component<any, any> {
                 <CardHeader title="碳匯估算" />
                 <Typography variant="h5" noWrap>
                     公有建築頂層面積約
-                    <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} </b>
-                    m<sup>2</sup>
+                    <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} </b>m<sup>2</sup>
                 </Typography>
-                <br/><br/>
+                <br />
                 <Typography variant="h6" noWrap>
-                    太陽能板覆蓋率
+                    太陽能板覆蓋率 {Math.floor(AppStore.Instance.solarCoverRatio * 100)}%
                 </Typography>
-                <div className={classes.slider}>
-                    <Slider className={classes.slider} aria-label="Custom marks" defaultValue={45} getAriaValueText={this.percentageText} step={1} valueLabelDisplay="on" marks={this.percentages} onChange={this.handlSliderChange} />
+                <div className={classes.sliderContainer}>
+                    <Slider aria-label="Custom marks" defaultValue={40} getAriaValueText={this.percentageText} step={1} valueLabelDisplay="on" marks={this.percentages} onChange={this.handlSliderChange} />
                 </div>
-                <br/><br/>
-                <Typography variant="h5" noWrap>
-                    預估每年效益可減下
+                <br />
+                <Typography variant="h6" noWrap>
+                    預估每年效益可減下CO<sub>2</sub>當量數
                 </Typography>
-                <br/>
+                <br />
                 <Typography variant="h3" noWrap>
                     <b>{`${this.carbonSinkValue(AppStore.Instance.solarCoverRatio)} 公噸 `}</b>
-                    CO<sub>2</sub>當量
                 </Typography>
                 <Tooltip title={this.formulaDescription}>
                     <p className={classes.formula}>計算公式</p>

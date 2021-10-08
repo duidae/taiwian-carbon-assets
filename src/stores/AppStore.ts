@@ -74,7 +74,7 @@ export class AppStore {
         this.selectedArea = defaultArea?.folder;
         const borderLayer = defaultArea?.layerGeojsons?.find(layerGeojson => layerGeojson?.includes("界"));
         this.isLayerSelected.set(`${defaultArea?.folder}/${borderLayer}`, true);
-        this.solarCoverRatio = 0.45;
+        this.solarCoverRatio = 0.4;
     }
 
     @action selectAreaLayers = (area: string) => {
