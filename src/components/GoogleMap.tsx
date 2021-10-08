@@ -45,7 +45,7 @@ const LAYER_STYLE_MAP = new Map<LayerType, any>([
         LayerType.GreenFacility,
         {
             strokeColor: "green",
-            fillColor: "green",
+            fillColor: "green"
         }
     ],
     [

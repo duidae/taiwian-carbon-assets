@@ -46,6 +46,10 @@ class CarbonSink extends React.Component<any, any> {
         {
             value: 10,
             label: "10%"
+        },
+        {
+            value: 0,
+            label: "0%"
         }
     ];
 
