@@ -90,7 +90,11 @@ export class GoogleMap extends React.Component<any> {
             });
             if (layerType === LayerType.GreenFacility) {
                 data.addListener("click", (event: any) => {
-                    const content = `${event.feature.getProperty("類別")}<br>${event.feature.getProperty("名稱")}<br>裝置容量: ${event.feature.getProperty("裝置容量-瓩")} 瓩`;
+                    const feature = event.feature;
+                    const category = feature.getProperty("類別");
+                    const name = feature.getProperty("名稱");
+                    const capacity = feature.getProperty("裝置容量-瓩");
+                    const content = `${category ? `${category}<br/>` : ""}${name ? `${name}<br/>` : ""}${capacity ? `${capacity} 瓩` : ""}`;
                     const clickInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: content});
                     clickInfoWindow.open({map: map, shouldFocus: false});
                 });

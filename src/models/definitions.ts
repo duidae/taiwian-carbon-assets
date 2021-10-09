@@ -18,7 +18,7 @@ export const FindLayerStyleByName = (jsonName: string): LayerType => {
         return LayerType.Building;
     } else if (jsonName.includes("公有")) {
         return LayerType.PublicAsset;
-    } else if (jsonName.includes("既有")) {
+    } else if (jsonName.includes("既有") || jsonName.includes("水力")) {
         return LayerType.GreenFacility;
     }
     return LayerType.Others;
