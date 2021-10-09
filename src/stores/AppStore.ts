@@ -37,10 +37,10 @@ export class AppStore {
             ]
         },
         {
-            folder: "花蓮縣壽豐鄉",
-            center: {lat: 23.85455775947227, lng: 121.53748791035855},
-            zoom: 12,
-            layerGeojsons: ["壽豐鄉區界.json", "壽豐鄉光電設施.json"],
+            folder: "花蓮縣吉安鄉",
+            center: {lat: 23.958145326789797, lng: 121.56952315343267},
+            zoom: 13,
+            layerGeojsons: ["吉安鄉區界.json", "吉安鄉微水力場址.json"],
             piChartData: {
                 labels: ["水圳", "埤塘", "林地"],
                 data: [4344, 5435, 1443]
