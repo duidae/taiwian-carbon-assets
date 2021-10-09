@@ -1,6 +1,6 @@
 import {action, computed, makeObservable, observable, ObservableMap} from "mobx";
 
-import {FindLayerStyleByName, LayerType} from "../models";
+import {CO2_EQ, FindLayerStyleByName, LayerType} from "../models";
 
 export type LayerGeojson = string;
 export type LayerSelections = ObservableMap<LayerGeojson, boolean>;
@@ -18,7 +18,7 @@ export class AppStore {
     @observable selectedArea: string | undefined;
     @observable layerGeojsons: LayerGeojson[];
     @observable isLayerSelected: ObservableMap<LayerGeojson, boolean>;
-    @observable solarCoverRatio: number;
+    @observable coverRatio: number;
 
     public analysisAreas = [
         {
@@ -34,7 +34,8 @@ export class AppStore {
                 {name: "光電設施", data: [80, 50, 30, 40, 100, 20]},
                 {name: "探捕捉設施", data: [20, 30, 40, 80, 20, 80]},
                 {name: "溼地經營", data: [44, 76, 78, 13, 43, 10]}
-            ]
+            ],
+            capacity: 860769 / 10
         },
         {
             folder: "花蓮縣吉安鄉",
@@ -43,13 +44,14 @@ export class AppStore {
             layerGeojsons: ["吉安鄉區界.json", "吉安鄉微水力場址.json"],
             piChartData: {
                 labels: ["林地", "水圳", "埤塘"],
-                data: [4344, 5435, 1443]
+                data: [4344, 5435, 443]
             },
             forceChartData: [
                 {name: "光電設施", data: [20, 30, 40, 80, 20, 80]},
                 {name: "探捕捉設施", data: [80, 50, 30, 40, 100, 20]},
                 {name: "溼地經營", data: [44, 76, 78, 13, 43, 10]}
-            ]
+            ],
+            capacity: 1529.78
         }
     ];
 
@@ -76,18 +78,22 @@ export class AppStore {
             const borderLayer = defaultArea?.layerGeojsons?.find(layerGeojson => layerGeojson?.includes(keyWord));
             this.isLayerSelected.set(`${defaultArea?.folder}/${borderLayer}`, true);
         });
-        this.solarCoverRatio = 0.4;
+        this.coverRatio = 0.4;
     }
 
     @action selectAreaLayers = (area: string) => {
         const analysisArea = this.analysisAreas?.find(analysisArea => analysisArea.folder === area);
         if (analysisArea) {
             this.selectedArea = area;
+            this.coverRatio = 0.4;
             const layerGeojsonPaths = analysisArea.layerGeojsons.map(layerGeojson => {
                 return `${analysisArea.folder}/${layerGeojson}`;
             });
             this.isLayerSelected?.forEach((isSelected, layerGeojson) => {
-                const defaultSelection = area === "臺北市大安區" ? FindLayerStyleByName(layerGeojson) === LayerType.Border || FindLayerStyleByName(layerGeojson) === LayerType.GreenFacility || FindLayerStyleByName(layerGeojson) === LayerType.PublicBuilding: true;
+                const defaultSelection =
+                    area === "臺北市大安區"
+                        ? FindLayerStyleByName(layerGeojson) === LayerType.Border || FindLayerStyleByName(layerGeojson) === LayerType.GreenFacility || FindLayerStyleByName(layerGeojson) === LayerType.PublicBuilding
+                        : true;
                 this.isLayerSelected.set(layerGeojson, layerGeojsonPaths.includes(layerGeojson) && defaultSelection);
             });
         }
@@ -99,8 +105,8 @@ export class AppStore {
         }
     };
 
-    @action setSolarCoverRatio = (ratio: number) => {
-        this.solarCoverRatio = ratio / 100;
+    @action setCoverRatio = (ratio: number) => {
+        this.coverRatio = ratio / 100;
     };
 
     /* why this is not working?
@@ -116,8 +122,23 @@ export class AppStore {
         return {center: area?.center, zoom: area?.zoom};
     }
 
-    @computed get selectedAreaSolarPanelArea(): number {
-        return 860769;
+    @computed get selectedAreaGreenFacilityDescription(): {type: string; desc: React.ReactNode} {
+        if (this.selectedArea === this.analysisAreas[0].folder) {
+            return {
+                type: "太陽能板",
+                desc: `公有建築頂層面積約 ${(this.analysisAreas[0].capacity * 10).toLocaleString()} 平方公尺`
+            };
+        } else {
+            return {
+                type: "微水力設施",
+                desc: "微水力設施潛力場址共 22 處"
+            };
+        }
+    }
+
+    @computed get carbonSink(): string {
+        const value = this.selectedArea === this.analysisAreas[0].folder ? this.analysisAreas[0].capacity : this.analysisAreas[1].capacity;
+        return value > 0 ? Math.floor(value * this.coverRatio * CO2_EQ)?.toLocaleString() : "";
     }
 
     @computed get selectedPiChartData(): {labels: string[]; data: number[]} | undefined {

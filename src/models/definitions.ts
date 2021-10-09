@@ -1,3 +1,6 @@
+// 1kWp equals to 0.509 mt (509 kg) equivalent weight of CO2
+export const CO2_EQ = 0.509;
+
 export const TAIPEI_CENTER = {lat: 25.026054, lng: 121.543439};
 
 export enum LayerType {

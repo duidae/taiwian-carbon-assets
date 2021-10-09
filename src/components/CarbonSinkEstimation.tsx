@@ -5,9 +5,6 @@ import {Card, CardHeader, Slider, Tooltip, Typography} from "@material-ui/core";
 
 import {AppStore} from "stores";
 
-// 1 m^2 solar panel can reduce 0.0509 mt (50.9 kg) equivalent weight of CO2 (Taipei area)
-const CO2_EQ = 0.0509;
-
 const styles = theme => ({
     root: {
         height: "100%"
@@ -27,27 +24,11 @@ class CarbonSink extends React.Component<any, any> {
     });
 
     private percentageText = value => {
-        return `${value}%`;
+        return `${Math.floor(value)}%`;
     };
-
-    private carbonSinkValue = percentage => {
-        return Math.floor(AppStore.Instance.selectedAreaSolarPanelArea * percentage * CO2_EQ)?.toLocaleString();
-    };
-
-    private formulaDescription = (
-        <p>
-            台北市10平方公尺(約3坪)的屋頂可利用面積
-            <br />
-            ＝1kWp的裝置容量
-            <br />
-            ＝每年大概發電1000度電
-            <br />
-            ＝約可減下509公斤的二氧化碳當量
-        </p>
-    );
 
     private handlSliderChange = (ev, newValue) => {
-        AppStore.Instance.setSolarCoverRatio(newValue);
+        AppStore.Instance.setCoverRatio(newValue);
     };
 
     public render() {
@@ -56,15 +37,23 @@ class CarbonSink extends React.Component<any, any> {
             <Card className={classes.root} variant="outlined">
                 <CardHeader title="碳匯估算" />
                 <Typography variant="h5" noWrap>
-                    公有建築頂層面積約
-                    <b> {AppStore.Instance.selectedAreaSolarPanelArea?.toLocaleString()} </b>m<sup>2</sup>
+                    {AppStore.Instance.selectedAreaGreenFacilityDescription.desc}
                 </Typography>
                 <br />
                 <Typography variant="h6" noWrap>
-                    太陽能板覆蓋率 {Math.floor(AppStore.Instance.solarCoverRatio * 100)}%
+                    {AppStore.Instance.selectedAreaGreenFacilityDescription.type}覆蓋率 {Math.floor(AppStore.Instance.coverRatio * 100)}%
                 </Typography>
                 <div className={classes.sliderContainer}>
-                    <Slider aria-label="Custom marks" defaultValue={40} getAriaValueText={this.percentageText} step={1} valueLabelDisplay="on" marks={this.percentages} onChange={this.handlSliderChange} />
+                    <Slider
+                        aria-label="Custom marks"
+                        value={Math.floor(AppStore.Instance.coverRatio * 100)}
+                        defaultValue={40}
+                        getAriaValueText={this.percentageText}
+                        step={1}
+                        valueLabelDisplay="on"
+                        marks={this.percentages}
+                        onChange={this.handlSliderChange}
+                    />
                 </div>
                 <br />
                 <Typography variant="h6" noWrap>
@@ -72,9 +61,9 @@ class CarbonSink extends React.Component<any, any> {
                 </Typography>
                 <br />
                 <Typography variant="h3" noWrap>
-                    <b>{`${this.carbonSinkValue(AppStore.Instance.solarCoverRatio)} 公噸 `}</b>
+                    <b>{`${AppStore.Instance.carbonSink} 公噸 `}</b>
                 </Typography>
-                <Tooltip title={this.formulaDescription}>
+                <Tooltip title={<p>綠能發電量1000度電/年＝約可減下509公斤的二氧化碳當量, 台北市10平方公尺(約3坪)的屋頂可利用面積＝1kWp的裝置容量</p>}>
                     <p className={classes.formula}>計算公式</p>
                 </Tooltip>
             </Card>
