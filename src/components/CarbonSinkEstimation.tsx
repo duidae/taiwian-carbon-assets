@@ -22,36 +22,9 @@ const styles = theme => ({
 
 @observer
 class CarbonSink extends React.Component<any, any> {
-    private percentages = [
-        {
-            value: 100,
-            label: "100%"
-        },
-        {
-            value: 50,
-            label: "50%"
-        },
-        {
-            value: 40,
-            label: "40%"
-        },
-        {
-            value: 30,
-            label: "30%"
-        },
-        {
-            value: 20,
-            label: "20%"
-        },
-        {
-            value: 10,
-            label: "10%"
-        },
-        {
-            value: 0,
-            label: "0%"
-        }
-    ];
+    private percentages = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(val => {
+        return {value: val, label: `${val}%`};
+    });
 
     private percentageText = value => {
         return `${value}%`;
