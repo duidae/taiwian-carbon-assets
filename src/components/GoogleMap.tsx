@@ -28,8 +28,8 @@ const LAYER_STYLE_MAP = new Map<LayerType, any>([
     [
         LayerType.PublicBuilding,
         {
-            strokeColor: "gray",
-            fillColor: "gray",
+            strokeColor: "darkGray",
+            fillColor: "darkGray",
             clickable: false
         }
     ],

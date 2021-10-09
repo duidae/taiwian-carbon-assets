@@ -42,7 +42,7 @@ export class AppStore {
             zoom: 13,
             layerGeojsons: ["吉安鄉區界.json", "吉安鄉微水力場址.json"],
             piChartData: {
-                labels: ["水圳", "埤塘", "林地"],
+                labels: ["林地", "水圳", "埤塘"],
                 data: [4344, 5435, 1443]
             },
             forceChartData: [
@@ -72,8 +72,10 @@ export class AppStore {
         // Activate the first area
         const defaultArea = this.analysisAreas?.[0];
         this.selectedArea = defaultArea?.folder;
-        const borderLayer = defaultArea?.layerGeojsons?.find(layerGeojson => layerGeojson?.includes("界"));
-        this.isLayerSelected.set(`${defaultArea?.folder}/${borderLayer}`, true);
+        ["界", "公有建物", "既有"].forEach(keyWord => {
+            const borderLayer = defaultArea?.layerGeojsons?.find(layerGeojson => layerGeojson?.includes(keyWord));
+            this.isLayerSelected.set(`${defaultArea?.folder}/${borderLayer}`, true);
+        });
         this.solarCoverRatio = 0.4;
     }
 
@@ -85,7 +87,8 @@ export class AppStore {
                 return `${analysisArea.folder}/${layerGeojson}`;
             });
             this.isLayerSelected?.forEach((isSelected, layerGeojson) => {
-                this.isLayerSelected.set(layerGeojson, layerGeojsonPaths.includes(layerGeojson) && FindLayerStyleByName(layerGeojson) === LayerType.Border ? true : false);
+                const defaultSelection = area === "臺北市大安區" ? FindLayerStyleByName(layerGeojson) === LayerType.Border || FindLayerStyleByName(layerGeojson) === LayerType.GreenFacility || FindLayerStyleByName(layerGeojson) === LayerType.PublicBuilding: true;
+                this.isLayerSelected.set(layerGeojson, layerGeojsonPaths.includes(layerGeojson) && defaultSelection);
             });
         }
     };
