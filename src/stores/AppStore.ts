@@ -122,7 +122,7 @@ export class AppStore {
         return {center: area?.center, zoom: area?.zoom};
     }
 
-    @computed get selectedAreaGreenFacilityDescription(): {type: string; desc: React.ReactNode} {
+    @computed get selectedAreaGreenFacilityDescription(): {type: string; desc: string} {
         if (this.selectedArea === this.analysisAreas[0].folder) {
             return {
                 type: "太陽能板",

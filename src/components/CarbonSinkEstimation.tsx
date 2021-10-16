@@ -31,13 +31,22 @@ class CarbonSink extends React.Component<any, any> {
         AppStore.Instance.setCoverRatio(newValue);
     };
 
+    private workAroundForSquareMeter = () => {
+        const desc = AppStore.Instance.selectedAreaGreenFacilityDescription.desc;
+        return desc?.includes("平方公尺") ? (
+            <React.Fragment>
+                {desc.replace("平方公尺", "")}m<sup>2</sup>
+            </React.Fragment>
+        ) : desc;
+    };
+
     public render() {
         const classes = this.props.classes;
         return (
             <Card className={classes.root} variant="outlined">
                 <CardHeader title="碳匯估算" />
                 <Typography variant="h5" noWrap>
-                    {AppStore.Instance.selectedAreaGreenFacilityDescription.desc}
+                    {this.workAroundForSquareMeter()}
                 </Typography>
                 <br />
                 <Typography variant="h6" noWrap>
