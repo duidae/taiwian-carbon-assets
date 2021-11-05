@@ -109,6 +109,10 @@ export class AppStore {
         this.coverRatio = ratio / 100;
     };
 
+    @action selectMatchingPlatform = () => {
+        // TODO
+    };
+
     /* why this is not working?
     @computed get dataLayerGeojsonMap(): Map<DataLayer, string> {
         let dataLayerGeojsonMap = new Map<DataLayer, string>([]);

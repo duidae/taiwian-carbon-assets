@@ -260,7 +260,7 @@ class DashboardLayout extends React.Component<any, any> {
                     }
                 >
                     {this.PRIMARY_CONTROLS.map(controlItem => (
-                        <ListItem button key={controlItem.key}>
+                        <ListItem button key={controlItem.key} onClick={() => AppStore.Instance.selectMatchingPlatform()}>
                             <ListItemIcon>{controlItem.icon}</ListItemIcon>
                             <ListItemText primary={controlItem.key} />
                         </ListItem>
