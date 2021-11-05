@@ -136,7 +136,7 @@ class DashboardLayout extends React.Component<any, any> {
         return DashboardLayout.DATA_LAYER_ICON.get(index === 0 ? LayerType.PUBLIC_ASSET : LayerType.OTHERS);
     };
 
-    private PRIMARY_CONTROLS = [{key: "碳收支", icon: <EcoIcon />}];
+    private PRIMARY_CONTROLS = [{key: "案場媒合", icon: <EcoIcon />}];
 
     constructor(props: any) {
         super(props);
@@ -252,11 +252,10 @@ class DashboardLayout extends React.Component<any, any> {
                     ))}
                 </List>
                 <Divider />
-                {/*
                 <List
                     subheader={
                         <ListSubheader color="primary" className={classes.listHeader}>
-                            {this.isDrawerOpen ? "碳收支" : "碳"}
+                            {this.isDrawerOpen ? "案場媒合" : "媒"}
                         </ListSubheader>
                     }
                 >
@@ -267,7 +266,6 @@ class DashboardLayout extends React.Component<any, any> {
                         </ListItem>
                     ))}
                 </List>
-                */}
             </Drawer>
         );
 
