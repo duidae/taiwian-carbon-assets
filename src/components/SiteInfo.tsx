@@ -32,8 +32,7 @@ class siteInfo extends React.Component<any, any> {
             [FieldName.Effect, caseInfo.effect],
             [FieldName.Method, caseInfo.method],
             [FieldName.Unit, caseInfo.unit],
-            [FieldName.Link, caseInfo.link],
-            [FieldName.Comment, caseInfo.comment]
+            [FieldName.Link, caseInfo.link]
         ]);
 
         return (
