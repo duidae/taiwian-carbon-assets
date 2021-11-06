@@ -4,7 +4,7 @@ import {withStyles} from "@material-ui/core/styles";
 import {Card, FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 
 import {AppStore} from "stores";
-import {REDUCE_CARBON_TYPES} from "models";
+import {ReduecCarbonMethod} from "models";
 
 const styles = theme => ({
     root: {
@@ -20,11 +20,13 @@ const styles = theme => ({
 
 @observer
 class siteFilter extends React.Component<any, any> {
-    private categories = REDUCE_CARBON_TYPES.map(category => {
+    private categories = Object.values(ReduecCarbonMethod).map(category => {
         return <MenuItem>{category}</MenuItem>;
     });
 
-    private handleCategoryChange = () => {};
+    private handleCategoryChange = (ev) => {
+        AppStore.Instance.selectCarbonMethod(ev.target.value);
+    };
 
     public render() {
         const classes = this.props.classes;
@@ -32,7 +34,7 @@ class siteFilter extends React.Component<any, any> {
             <Card className={classes.root} variant="outlined">
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">減碳方式</InputLabel>
-                    <Select labelId="demo-simple-select-label" id="demo-simple-select" value={undefined} label="減碳方式" onChange={this.handleCategoryChange}>
+                    <Select labelId="demo-simple-select-label" id="demo-simple-select" value={AppStore.Instance.selectCarbonMethod} label="減碳方式" onChange={this.handleCategoryChange}>
                         {this.categories}
                     </Select>
                 </FormControl>

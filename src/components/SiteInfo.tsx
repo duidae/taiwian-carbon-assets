@@ -10,11 +10,8 @@ const styles = theme => ({
     root: {
         height: "100%"
     },
-    sliderContainer: {
-        margin: "20px"
-    },
-    formula: {
-        textDecoration: "underline dashed"
+    field: {
+        width: 200
     }
 });
 
@@ -43,7 +40,7 @@ class siteInfo extends React.Component<any, any> {
                             {Object.values(FieldName).map(field => {
                                 return (
                                     <TableRow>
-                                        <TableCell>
+                                        <TableCell className={classes.field}>
                                             <b>{field}</b>
                                         </TableCell>
                                         <TableCell>

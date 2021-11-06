@@ -42,7 +42,23 @@ export enum FieldName {
     Link = "案件連結"
 }
 
-export const REDUCE_CARBON_TYPES = ["綠資源", "光電設施", "小風機", "設備經營管理", "小水力", "生質能", "水環境", "再生農漁業", "低碳社區", "地方創生", "大學合作", "園區開發", "都市更新", "重劃區"];
+export enum ReduecCarbonMethod {
+    All = "全部",
+    Green = "綠資源",
+    Solar = "光電設施",
+    Wind = "小風機",
+    Manage = "設備經營管理",
+    Water = "小水力",
+    Biomass = "生質能",
+    WaterEnv = "水環境",
+    Fish = "再生農漁業",
+    Community = "低碳社區",
+    Regeneration = "地方創生",
+    College = "大學合作",
+    Development = "園區開發",
+    UR = "都市更新",
+    Redevelopment = "重劃區"
+}
 
 type caseID = number;
 export const SITE_INFO = new Map<caseID, any>([

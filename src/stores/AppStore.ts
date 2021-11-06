@@ -1,6 +1,6 @@
 import {action, computed, makeObservable, observable, ObservableMap} from "mobx";
 
-import {CO2_EQ, FindLayerStyleByName, LayerType} from "../models";
+import {CO2_EQ, FindLayerStyleByName, LayerType, ReduecCarbonMethod} from "../models";
 
 export type LayerGeojson = string;
 export type LayerSelections = ObservableMap<LayerGeojson, boolean>;
@@ -20,7 +20,7 @@ export class AppStore {
     @observable isLayerSelected: ObservableMap<LayerGeojson, boolean>;
     @observable coverRatio: number;
     @observable selectedCaseID: number;
-    @observable filterCarbonType: string;
+    @observable filterCarbonType: ReduecCarbonMethod;
     @observable filterRangeLowerBound: number;
     @observable filterRangeUpperBound: number;
 
@@ -90,7 +90,7 @@ export class AppStore {
         this.coverRatio = 0.4;
 
         this.selectedCaseID = 1;
-        this.filterCarbonType = "";
+        this.filterCarbonType = ReduecCarbonMethod.All;
         this.filterRangeLowerBound = 0;
         this.filterRangeUpperBound = 606816;
     }
@@ -121,6 +121,10 @@ export class AppStore {
 
     @action setCoverRatio = (ratio: number) => {
         this.coverRatio = ratio / 100;
+    };
+
+    @action selectCarbonMethod = (method: ReduecCarbonMethod) => {
+        this.filterCarbonType = method;
     };
 
     @action selectCaseID = (caseID: number) => {
