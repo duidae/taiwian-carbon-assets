@@ -1,7 +1,7 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 import {withStyles} from "@material-ui/core/styles";
-import {Card, CardHeader} from "@material-ui/core";
+import {Card} from "@material-ui/core";
 
 import {AppStore} from "stores";
 

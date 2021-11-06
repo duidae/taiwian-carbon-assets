@@ -1,7 +1,7 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 import {withStyles} from "@material-ui/core/styles";
-import {Card, CardHeader, FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
+import {Card, FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 
 import {AppStore} from "stores";
 import {REDUCE_CARBON_TYPES} from "models";
