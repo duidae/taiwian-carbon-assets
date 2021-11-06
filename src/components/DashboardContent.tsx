@@ -27,11 +27,11 @@ function DashboardContent(props) {
     return (
         <Container className={classes.root} maxWidth="xl">
             <Grid className={classes.gridContainer} container direction={"row"} spacing={2}>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <GoogleMap />
                 </Grid>
                 {selectedArea !== "案場媒合" ? (
-                    <Grid item xs={4} className={classes.chartContainer}>
+                    <Grid item xs={5} className={classes.chartContainer}>
                         <Grid item className={classes.chart}>
                             <CarbonSinkEstimation />
                         </Grid>
@@ -40,7 +40,7 @@ function DashboardContent(props) {
                         </Grid>
                     </Grid>
                 ) : (
-                    <Grid item xs={4} className={classes.chartContainer}>
+                    <Grid item xs={5} className={classes.chartContainer}>
                         <Grid item className={classes.chart}>
                             <SiteFilter />
                         </Grid>
