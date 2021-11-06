@@ -37,7 +37,9 @@ class CarbonSink extends React.Component<any, any> {
             <React.Fragment>
                 {desc.replace("平方公尺", "")}m<sup>2</sup>
             </React.Fragment>
-        ) : desc;
+        ) : (
+            desc
+        );
     };
 
     public render() {

@@ -52,6 +52,12 @@ export class AppStore {
                 {name: "溼地經營", data: [44, 76, 78, 13, 43, 10]}
             ],
             capacity: 1529.78
+        },
+        {
+            folder: "案場媒合",
+            center: {lat: 23.958145326789797, lng: 121.56952315343267},
+            zoom: 13,
+            layerGeojsons: ["案場媒合.json"]
         }
     ];
 
@@ -109,10 +115,6 @@ export class AppStore {
         this.coverRatio = ratio / 100;
     };
 
-    @action selectMatchingPlatform = () => {
-        // TODO
-    };
-
     /* why this is not working?
     @computed get dataLayerGeojsonMap(): Map<DataLayer, string> {
         let dataLayerGeojsonMap = new Map<DataLayer, string>([]);
@@ -127,22 +129,23 @@ export class AppStore {
     }
 
     @computed get selectedAreaGreenFacilityDescription(): {type: string; desc: string} {
-        if (this.selectedArea === this.analysisAreas[0].folder) {
+        if (this.selectedArea === this.analysisAreas[0].folder && this.analysisAreas[0].capacity) {
             return {
                 type: "太陽能板",
                 desc: `公有建築頂層面積約 ${(this.analysisAreas[0].capacity * 10).toLocaleString()} 平方公尺`
             };
-        } else {
+        } else if (this.selectedArea === this.analysisAreas[1].folder) {
             return {
                 type: "微水力設施",
                 desc: "微水力設施潛力場址共 22 處"
             };
         }
+        return {type: "", desc: ""};
     }
 
     @computed get carbonSink(): string {
         const value = this.selectedArea === this.analysisAreas[0].folder ? this.analysisAreas[0].capacity : this.analysisAreas[1].capacity;
-        return value > 0 ? Math.floor(value * this.coverRatio * CO2_EQ)?.toLocaleString() : "";
+        return value && value > 0 ? Math.floor(value * this.coverRatio * CO2_EQ)?.toLocaleString() : "";
     }
 
     @computed get selectedPiChartData(): {labels: string[]; data: number[]} | undefined {

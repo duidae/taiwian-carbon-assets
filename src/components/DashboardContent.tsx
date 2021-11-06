@@ -22,6 +22,7 @@ const styles = theme => ({
 });
 
 function DashboardContent(props) {
+    const selectedArea = props.selectedArea;
     const classes = props.classes;
     return (
         <Container className={classes.root} maxWidth="xl">
@@ -29,14 +30,16 @@ function DashboardContent(props) {
                 <Grid item xs={8}>
                     <GoogleMap />
                 </Grid>
-                <Grid item xs={4} className={classes.chartContainer}>
-                    <Grid item className={classes.chart}>
-                        <CarbonSinkEstimation />
+                {selectedArea !== "案場媒合" ? (
+                    <Grid item xs={4} className={classes.chartContainer}>
+                        <Grid item className={classes.chart}>
+                            <CarbonSinkEstimation />
+                        </Grid>
+                        <Grid item className={classes.chart}>
+                            <PiChartComponent data={AppStore.Instance.selectedPiChartData} />
+                        </Grid>
                     </Grid>
-                    <Grid item className={classes.chart}>
-                        <PiChartComponent data={AppStore.Instance.selectedPiChartData} />
-                    </Grid>
-                </Grid>
+                ) : undefined}
             </Grid>
         </Container>
     );

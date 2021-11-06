@@ -214,42 +214,44 @@ class DashboardLayout extends React.Component<any, any> {
                         </ListSubheader>
                     }
                 >
-                    {AppStore.Instance.analysisAreas?.map(analysisArea => (
-                        <React.Fragment>
-                            <ListItem key={`list-${analysisArea.folder}`} button onClick={() => AppStore.Instance.selectAreaLayers(analysisArea.folder)}>
-                                <ListItemIcon>
-                                    {DashboardLayout.GET_AREA_TYPE(analysisArea.folder) === AreaType.CITY ? (
-                                        <LocationCityIcon color={AppStore.Instance.selectedArea === analysisArea.folder ? "primary" : "disabled"} />
-                                    ) : (
-                                        <EmojiNatureIcon color={AppStore.Instance.selectedArea === analysisArea.folder ? "primary" : "disabled"} />
+                    {AppStore.Instance.analysisAreas
+                        ?.filter(area => area.folder !== "案場媒合")
+                        ?.map(analysisArea => (
+                            <React.Fragment>
+                                <ListItem key={`list-${analysisArea.folder}`} button onClick={() => AppStore.Instance.selectAreaLayers(analysisArea.folder)}>
+                                    <ListItemIcon>
+                                        {DashboardLayout.GET_AREA_TYPE(analysisArea.folder) === AreaType.CITY ? (
+                                            <LocationCityIcon color={AppStore.Instance.selectedArea === analysisArea.folder ? "primary" : "disabled"} />
+                                        ) : (
+                                            <EmojiNatureIcon color={AppStore.Instance.selectedArea === analysisArea.folder ? "primary" : "disabled"} />
+                                        )}
+                                    </ListItemIcon>
+                                    <ListItemText primary={analysisArea.folder} />
+                                    {this.isDrawerOpen && (
+                                        <ListItemSecondaryAction>
+                                            <IconButton edge="end" aria-label="comments" onClick={() => this.handleAreaOpenClick(analysisArea.folder)}>
+                                                {this.isAreaOpen.get(analysisArea.folder) ? <ExpandLess /> : <ExpandMore />}
+                                            </IconButton>
+                                        </ListItemSecondaryAction>
                                     )}
-                                </ListItemIcon>
-                                <ListItemText primary={analysisArea.folder} />
-                                {this.isDrawerOpen && (
-                                    <ListItemSecondaryAction>
-                                        <IconButton edge="end" aria-label="comments" onClick={() => this.handleAreaOpenClick(analysisArea.folder)}>
-                                            {this.isAreaOpen.get(analysisArea.folder) ? <ExpandLess /> : <ExpandMore />}
-                                        </IconButton>
-                                    </ListItemSecondaryAction>
-                                )}
-                            </ListItem>
-                            <Collapse key={`collapse-${analysisArea.folder}`} in={this.isAreaOpen.get(analysisArea.folder)} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
-                                    {analysisArea.layerGeojsons?.map(layerGeojson => {
-                                        const layerGeojsonPath = `${analysisArea.folder}/${layerGeojson}`;
-                                        return (
-                                            <ListItem key={layerGeojson} button className={classes.nested} onClick={() => AppStore.Instance.selectLayer(layerGeojsonPath)}>
-                                                <ListItemIcon>
-                                                    <LayersIcon color={AppStore.Instance.isLayerSelected?.get(layerGeojsonPath) ? "primary" : "disabled"} />
-                                                </ListItemIcon>
-                                                <ListItemText primary={layerGeojson.replace(/\.json$/, "")} />
-                                            </ListItem>
-                                        );
-                                    })}
-                                </List>
-                            </Collapse>
-                        </React.Fragment>
-                    ))}
+                                </ListItem>
+                                <Collapse key={`collapse-${analysisArea.folder}`} in={this.isAreaOpen.get(analysisArea.folder)} timeout="auto" unmountOnExit>
+                                    <List component="div" disablePadding>
+                                        {analysisArea.layerGeojsons?.map(layerGeojson => {
+                                            const layerGeojsonPath = `${analysisArea.folder}/${layerGeojson}`;
+                                            return (
+                                                <ListItem key={layerGeojson} button className={classes.nested} onClick={() => AppStore.Instance.selectLayer(layerGeojsonPath)}>
+                                                    <ListItemIcon>
+                                                        <LayersIcon color={AppStore.Instance.isLayerSelected?.get(layerGeojsonPath) ? "primary" : "disabled"} />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={layerGeojson.replace(/\.json$/, "")} />
+                                                </ListItem>
+                                            );
+                                        })}
+                                    </List>
+                                </Collapse>
+                            </React.Fragment>
+                        ))}
                 </List>
                 <Divider />
                 <List
@@ -260,7 +262,7 @@ class DashboardLayout extends React.Component<any, any> {
                     }
                 >
                     {this.PRIMARY_CONTROLS.map(controlItem => (
-                        <ListItem button key={controlItem.key} onClick={() => AppStore.Instance.selectMatchingPlatform()}>
+                        <ListItem button key={controlItem.key} onClick={() => AppStore.Instance.selectAreaLayers("案場媒合")}>
                             <ListItemIcon>{controlItem.icon}</ListItemIcon>
                             <ListItemText primary={controlItem.key} />
                         </ListItem>
@@ -277,7 +279,7 @@ class DashboardLayout extends React.Component<any, any> {
                 </ThemeProvider>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <DashboardContentComponent />
+                    <DashboardContentComponent selectedArea={AppStore.Instance.selectedArea} />
                 </main>
             </div>
         );
