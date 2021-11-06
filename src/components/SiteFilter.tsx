@@ -4,6 +4,7 @@ import {withStyles} from "@material-ui/core/styles";
 import {Card, CardHeader, FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 
 import {AppStore} from "stores";
+import {REDUCE_CARBON_TYPES} from "models";
 
 const styles = theme => ({
     root: {
@@ -19,7 +20,7 @@ const styles = theme => ({
 
 @observer
 class siteFilter extends React.Component<any, any> {
-    private categories = ["綠資源", "光電設施", "小風機", "設備經營管理", "小水力", "生質能", "水環境", "再生農漁業", "低碳社區", "地方創生", "大學合作", "園區開發", "都市更新", "重劃區"].map(category => {
+    private categories = REDUCE_CARBON_TYPES.map(category => {
         return <MenuItem>{category}</MenuItem>;
     });
 

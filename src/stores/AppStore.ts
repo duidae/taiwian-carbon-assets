@@ -19,6 +19,9 @@ export class AppStore {
     @observable layerGeojsons: LayerGeojson[];
     @observable isLayerSelected: ObservableMap<LayerGeojson, boolean>;
     @observable coverRatio: number;
+    @observable filterCarbonType: string;
+    @observable filterRangeLowerBound: number;
+    @observable filterRangeUpperBound: number;
 
     public analysisAreas = [
         {
@@ -84,6 +87,10 @@ export class AppStore {
             this.isLayerSelected.set(`${defaultArea?.folder}/${borderLayer}`, true);
         });
         this.coverRatio = 0.4;
+
+        this.filterCarbonType = "";
+        this.filterRangeLowerBound = 0;
+        this.filterRangeUpperBound = 0;
     }
 
     @action selectAreaLayers = (area: string) => {

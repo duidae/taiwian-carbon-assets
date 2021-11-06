@@ -26,3 +26,5 @@ export const FindLayerStyleByName = (jsonName: string): LayerType => {
     }
     return LayerType.Others;
 };
+
+export const REDUCE_CARBON_TYPES = ["綠資源", "光電設施", "小風機", "設備經營管理", "小水力", "生質能", "水環境", "再生農漁業", "低碳社區", "地方創生", "大學合作", "園區開發", "都市更新", "重劃區"];
