@@ -4,4 +4,7 @@ export * from "./DashboardLayout";
 export * from "./ForceChart";
 export * from "./GoogleMap";
 export * from "./PiChart";
+export * from "./SiteFilter";
+export * from "./SitePicture";
+export * from "./SiteInfo";
 export * from "./SearchInput";

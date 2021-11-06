@@ -1,7 +1,7 @@
 import {Grid, Container} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 
-import {CarbonSinkEstimation, GoogleMap, PiChartComponent} from ".";
+import {CarbonSinkEstimation, GoogleMap, PiChartComponent, SiteFilter, SitePicture, SiteInfo} from ".";
 import {AppStore} from "stores";
 
 const styles = theme => ({
@@ -39,7 +39,19 @@ function DashboardContent(props) {
                             <PiChartComponent data={AppStore.Instance.selectedPiChartData} />
                         </Grid>
                     </Grid>
-                ) : undefined}
+                ) : (
+                    <Grid item xs={4} className={classes.chartContainer}>
+                        <Grid item className={classes.chart}>
+                            <SiteFilter />
+                        </Grid>
+                        <Grid item className={classes.chart}>
+                            <SitePicture />
+                        </Grid>
+                        <Grid item className={classes.chart}>
+                            <SiteInfo />
+                        </Grid>
+                    </Grid>
+                )}
             </Grid>
         </Container>
     );
