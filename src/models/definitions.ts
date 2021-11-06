@@ -9,6 +9,7 @@ export enum LayerType {
     PublicBuilding,
     PublicAsset,
     GreenFacility,
+    Matching,
     Others
 }
 
@@ -23,6 +24,8 @@ export const FindLayerStyleByName = (jsonName: string): LayerType => {
         return LayerType.PublicAsset;
     } else if (jsonName.includes("既有") || jsonName.includes("水力")) {
         return LayerType.GreenFacility;
+    } else if (jsonName.includes("媒合")) {
+        return LayerType.Matching;
     }
     return LayerType.Others;
 };

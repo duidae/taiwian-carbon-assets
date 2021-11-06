@@ -5,7 +5,7 @@ import GoogleMapReact from "google-map-react";
 import "./GoogleMap.scss";
 
 import {AppStore, LayerGeojson} from "stores";
-import {FindLayerStyleByName, LayerType, TAIPEI_CENTER} from "models";
+import {FindLayerStyleByName, LayerType, TAIPEI_CENTER, SITE_INFO} from "models";
 
 const LAYER_STYLE_MAP = new Map<LayerType, any>([
     [
@@ -113,6 +113,15 @@ export class GoogleMap extends React.Component<any> {
                     mouseoverInfoWindow?.close();
                 });
                 */
+            } else if (layerType === LayerType.Matching) {
+                data.addListener("click", (event: any) => {
+                    const feature = event.feature;
+                    const caseID = feature.getProperty("caseID");
+                    const siteInfo = SITE_INFO.get(caseID);
+                    AppStore.Instance.selectCaseID(caseID);
+                    const clickInfoWindow = new google.maps.InfoWindow({position: event.latLng, content: siteInfo.name});
+                    clickInfoWindow.open({map: map, shouldFocus: false});
+                });
             }
             this.dataLayerMap.set(layerGeojson, data);
             console.log(`${geojson} loaded.`);
