@@ -1,7 +1,7 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 import {withStyles} from "@material-ui/core/styles";
-import {Card, FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
+import {Button, Card, Divider, FormControl, FormControlLabel, InputAdornment, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
 
 import {AppStore} from "stores";
 import {ReduecCarbonMethod} from "models";
@@ -13,18 +13,18 @@ const styles = theme => ({
     sliderContainer: {
         margin: "20px"
     },
-    formula: {
-        textDecoration: "underline dashed"
+    formControl: {
+        minWidth: 150
     }
 });
 
 @observer
 class siteFilter extends React.Component<any, any> {
     private categories = Object.values(ReduecCarbonMethod).map(category => {
-        return <MenuItem>{category}</MenuItem>;
+        return <MenuItem value={category}>{category}</MenuItem>;
     });
 
-    private handleCategoryChange = (ev) => {
+    private handleCategoryChange = ev => {
         AppStore.Instance.selectCarbonMethod(ev.target.value);
     };
 
@@ -32,12 +32,44 @@ class siteFilter extends React.Component<any, any> {
         const classes = this.props.classes;
         return (
             <Card className={classes.root} variant="outlined">
-                <FormControl fullWidth>
+                <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">減碳方式</InputLabel>
-                    <Select labelId="demo-simple-select-label" id="demo-simple-select" value={AppStore.Instance.selectCarbonMethod} label="減碳方式" onChange={this.handleCategoryChange}>
+                    <Select value={AppStore.Instance.filterCarbonType} label="減碳方式" onChange={this.handleCategoryChange}>
                         {this.categories}
                     </Select>
                 </FormControl>
+                <Divider orientation="vertical" flexItem />
+                <FormControlLabel
+                    labelPlacement="start"
+                    control={
+                        <TextField
+                            label="年減量額度"
+                            value={AppStore.Instance.filterRangeLowerBound}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">tCO2e/yr</InputAdornment>
+                            }}
+                            variant="outlined"
+                        />
+                    }
+                    label=""
+                />
+                <FormControlLabel
+                    labelPlacement="start"
+                    control={
+                        <TextField
+                            label="年減量額度"
+                            value={AppStore.Instance.filterRangeUpperBound}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">tCO2e/yr</InputAdornment>
+                            }}
+                            variant="outlined"
+                        />
+                    }
+                    label="至"
+                />
+                <Button variant="outlined" color="primary">
+                    搜尋
+                </Button>
             </Card>
         );
     }
