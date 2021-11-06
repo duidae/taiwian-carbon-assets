@@ -23,7 +23,6 @@ class sitePicture extends React.Component<any, any> {
         const classes = this.props.classes;
         return (
             <Card className={classes.root} variant="outlined">
-                <CardHeader title="案場景象" />
                 {<img height={250} src={`matching/${AppStore.Instance.selectedCaseID}.jpg`} alt={`${AppStore.Instance.selectedCaseID}.jpg`} />}
             </Card>
         );

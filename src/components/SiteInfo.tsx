@@ -38,7 +38,6 @@ class siteInfo extends React.Component<any, any> {
 
         return (
             <Card className={classes.root} variant="outlined">
-                <CardHeader title="案場資訊" />
                 <TableContainer>
                     <Table>
                         <TableBody>
