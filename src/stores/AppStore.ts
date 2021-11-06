@@ -19,6 +19,7 @@ export class AppStore {
     @observable layerGeojsons: LayerGeojson[];
     @observable isLayerSelected: ObservableMap<LayerGeojson, boolean>;
     @observable coverRatio: number;
+    @observable selectedCaseID: number;
     @observable filterCarbonType: string;
     @observable filterRangeLowerBound: number;
     @observable filterRangeUpperBound: number;
@@ -88,9 +89,10 @@ export class AppStore {
         });
         this.coverRatio = 0.4;
 
+        this.selectedCaseID = 1;
         this.filterCarbonType = "";
         this.filterRangeLowerBound = 0;
-        this.filterRangeUpperBound = 0;
+        this.filterRangeUpperBound = 606816;
     }
 
     @action selectAreaLayers = (area: string) => {

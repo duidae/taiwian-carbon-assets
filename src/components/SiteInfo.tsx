@@ -1,9 +1,10 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 import {withStyles} from "@material-ui/core/styles";
-import {Card, CardHeader, Slider, Tooltip, Typography} from "@material-ui/core";
+import {Card, CardHeader, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@material-ui/core";
 
 import {AppStore} from "stores";
+import {FieldName, SITE_INFO} from "models";
 
 const styles = theme => ({
     root: {
@@ -21,18 +22,47 @@ const styles = theme => ({
 class siteInfo extends React.Component<any, any> {
     public render() {
         const classes = this.props.classes;
+        const caseInfo = SITE_INFO.get(AppStore.Instance.selectedCaseID);
+        const castInfoMap = new Map<FieldName, string | number>([
+            [FieldName.Name, caseInfo.name],
+            [FieldName.Type, caseInfo.type],
+            [FieldName.Quota, caseInfo.quota],
+            [FieldName.Cost, caseInfo.cost],
+            [FieldName.Means, caseInfo.means],
+            [FieldName.Effect, caseInfo.effect],
+            [FieldName.Method, caseInfo.method],
+            [FieldName.Unit, caseInfo.unit],
+            [FieldName.Link, caseInfo.link],
+            [FieldName.Comment, caseInfo.comment]
+        ]);
+
         return (
             <Card className={classes.root} variant="outlined">
                 <CardHeader title="案場資訊" />
-                <Typography variant="h5" noWrap></Typography>
-                <br />
-                <Typography variant="h6" noWrap>
-                    {AppStore.Instance.selectedAreaGreenFacilityDescription.type}覆蓋率 {Math.floor(AppStore.Instance.coverRatio * 100)}%
-                </Typography>
-                <Typography variant="h6" noWrap>
-                    預估每年效益可減下CO<sub>2</sub>當量數
-                </Typography>
-                <br />
+                <TableContainer>
+                    <Table>
+                        <TableBody>
+                            {Object.values(FieldName).map(field => {
+                                return (
+                                    <TableRow>
+                                        <TableCell>
+                                            <b>{field}</b>
+                                        </TableCell>
+                                        <TableCell>
+                                            {field === FieldName.Link && castInfoMap.get(field) ? (
+                                                <a href={`${castInfoMap.get(field) as string}`} target="_blank">
+                                                    {castInfoMap.get(field)}
+                                                </a>
+                                            ) : (
+                                                castInfoMap.get(field)
+                                            )}
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Card>
         );
     }
