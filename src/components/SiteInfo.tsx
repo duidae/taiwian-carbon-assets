@@ -1,7 +1,7 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 import {withStyles} from "@material-ui/core/styles";
-import {Card, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
+import {Card, CardHeader, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 
 import {AppStore} from "stores";
 import {FieldName, SITE_INFO} from "models";
@@ -34,6 +34,8 @@ class siteInfo extends React.Component<any, any> {
 
         return (
             <Card className={classes.root} variant="outlined">
+                <CardHeader title="案場資訊" />
+                <img height={250} src={`matching/${AppStore.Instance.selectedCaseID}.jpg`} alt={`${AppStore.Instance.selectedCaseID}.jpg`} />
                 <TableContainer>
                     <Table>
                         <TableBody>

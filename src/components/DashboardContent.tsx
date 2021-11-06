@@ -45,9 +45,6 @@ function DashboardContent(props) {
                             <SiteFilter />
                         </Grid>
                         <Grid item className={classes.chart}>
-                            <SitePicture />
-                        </Grid>
-                        <Grid item className={classes.chart}>
                             <SiteInfo />
                         </Grid>
                     </Grid>
