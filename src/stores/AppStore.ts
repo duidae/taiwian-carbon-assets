@@ -55,8 +55,8 @@ export class AppStore {
         },
         {
             folder: "案場媒合",
-            center: {lat: 23.958145326789797, lng: 121.56952315343267},
-            zoom: 13,
+            center: {lat: 23.60651843061501, lng: 120.91591914241587},
+            zoom: 8,
             layerGeojsons: ["案場媒合.json"]
         }
     ];
@@ -65,14 +65,13 @@ export class AppStore {
         makeObservable(this);
 
         this.layerGeojsons = [];
-        this.analysisAreas?.forEach(
-            area =>
-                (this.layerGeojsons = this.layerGeojsons.concat(
-                    area.layerGeojsons.map(layerGeojson => {
-                        return `${area.folder}/${layerGeojson}`;
-                    })
-                ))
-        );
+        this.analysisAreas?.forEach(area => {
+            this.layerGeojsons = this.layerGeojsons.concat(
+                area.layerGeojsons.map(layerGeojson => {
+                    return `${area.folder}/${layerGeojson}`;
+                })
+            );
+        });
 
         this.isLayerSelected = new ObservableMap<LayerGeojson, boolean>([]);
         this.layerGeojsons?.forEach(layerGeojson => this.isLayerSelected.set(layerGeojson, false));
