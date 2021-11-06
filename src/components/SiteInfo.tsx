@@ -10,6 +10,9 @@ const styles = theme => ({
     root: {
         height: "100%"
     },
+    table: {
+        maxHeight: 440
+    },
     field: {
         width: 200
     }
@@ -36,7 +39,7 @@ class siteInfo extends React.Component<any, any> {
             <Card className={classes.root} variant="outlined">
                 <CardHeader title="案場資訊" />
                 <img height={250} src={`matching/${AppStore.Instance.selectedCaseID}.jpg`} alt={`${AppStore.Instance.selectedCaseID}.jpg`} />
-                <TableContainer>
+                <TableContainer className={classes.table}>
                     <Table>
                         <TableBody>
                             {Object.values(FieldName).map(field => {
